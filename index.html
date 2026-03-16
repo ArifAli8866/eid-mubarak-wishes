@@ -1,1377 +1,938 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eid Mubarak Wishes 🌙</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600;700&display=swap"
-        rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html,
-        body {
-            height: 100%;
-            font-family: 'Nunito', sans-serif;
-            overflow: hidden;
-        }
-
-        body {
-            background: linear-gradient(135deg, #fff0f5 0%, #f0f8ff 50%, #fff5f0 100%);
-            color: #5a3a4a;
-        }
-
-        /* ===== PETALS ===== */
-        .petal {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            animation: petalFall linear infinite;
-            font-size: 16px;
-            opacity: 0.5;
-        }
-
-        @keyframes petalFall {
-            0% {
-                transform: translateY(-20px) rotate(0deg);
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 0.6;
-            }
-
-            90% {
-                opacity: 0.3;
-            }
-
-            100% {
-                transform: translateY(105vh) rotate(400deg);
-                opacity: 0;
-            }
-        }
-
-        /* ===== PAGES ===== */
-        .page {
-            position: fixed;
-            inset: 0;
-            z-index: 1;
-            overflow-y: auto;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 30px 16px 80px;
-            opacity: 0;
-            pointer-events: none;
-            transform: translateX(50px);
-            transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-
-        .page.active {
-            opacity: 1;
-            pointer-events: all;
-            transform: translateX(0);
-        }
-
-        .page.slide-out {
-            opacity: 0;
-            transform: translateX(-50px);
-        }
-
-        .inner {
-            width: 100%;
-            max-width: 680px;
-        }
-
-        /* ===== HEADER ===== */
-        .hdr {
-            text-align: center;
-            margin-bottom: 28px;
-        }
-
-        .hdr .moon {
-            font-size: 50px;
-            display: block;
-            animation: moonSway 3s ease-in-out infinite;
-        }
-
-        @keyframes moonSway {
-
-            0%,
-            100% {
-                transform: rotate(-10deg)
-            }
-
-            50% {
-                transform: rotate(10deg)
-            }
-        }
-
-        .hdr h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: clamp(2rem, 7vw, 3rem);
-            background: linear-gradient(135deg, #e07b9a, #9b59b6, #5dade2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1.2;
-            margin-top: 4px;
-        }
-
-        .hdr p {
-            font-size: .88rem;
-            color: #b07090;
-            margin-top: 4px;
-        }
-
-        /* ===== PANEL ===== */
-        .panel {
-            background: rgba(255, 255, 255, 0.82);
-            backdrop-filter: blur(12px);
-            border-radius: 24px;
-            padding: 24px 22px 20px;
-            box-shadow: 0 6px 36px rgba(200, 120, 160, 0.13);
-            border: 1.5px solid rgba(255, 190, 210, 0.4);
-            margin-bottom: 16px;
-        }
-
-        .panel-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.15rem;
-            color: #c06080;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .badge {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #f09ab5, #b07ad5);
-            color: #fff;
-            font-size: .7rem;
-            font-weight: 800;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        /* ===== RELATION GRID ===== */
-        .rel-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
-            gap: 9px;
-        }
-
-        .rel-card {
-            border: 2px solid transparent;
-            border-radius: 14px;
-            padding: 12px 6px;
-            cursor: pointer;
-            background: #fff0f5;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-            font-size: .82rem;
-            font-weight: 700;
-            color: #5a3a4a;
-            box-shadow: 0 2px 8px rgba(200, 130, 160, .12);
-            transition: all .2s ease;
-        }
-
-        .rel-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 18px rgba(200, 130, 160, .25);
-        }
-
-        .rel-card.picked {
-            border-color: #e07b9a;
-            background: #ffe0ea;
-            transform: translateY(-2px) scale(1.04);
-        }
-
-        .rel-card span.ico {
-            font-size: 24px;
-        }
-
-        /* ===== QUESTIONS ===== */
-        .q-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        @media(max-width:500px) {
-            .q-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .q-item {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .q-item.full {
-            grid-column: 1/-1;
-        }
-
-        .q-item label {
-            font-size: .74rem;
-            font-weight: 700;
-            color: #b07090;
-            text-transform: uppercase;
-            letter-spacing: .5px;
-        }
-
-        .q-item input,
-        .q-item select {
-            border: 1.5px solid #f0c0d0;
-            border-radius: 11px;
-            padding: 10px 13px;
-            font-family: 'Nunito', sans-serif;
-            font-size: .92rem;
-            outline: none;
-            background: rgba(255, 255, 255, .9);
-            color: #5a3a4a;
-            transition: border-color .2s, box-shadow .2s;
-        }
-
-        .q-item input:focus,
-        .q-item select:focus {
-            border-color: #e07b9a;
-            box-shadow: 0 0 0 3px rgba(224, 123, 154, .15);
-        }
-
-        /* ===== BUTTONS ===== */
-        .btn-main {
-            background: linear-gradient(135deg, #f09ab5, #b07ad5);
-            color: #fff;
-            border: none;
-            border-radius: 14px;
-            padding: 13px 28px;
-            font-family: 'Nunito', sans-serif;
-            font-size: .96rem;
-            font-weight: 700;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            box-shadow: 0 4px 14px rgba(180, 100, 200, .3);
-            transition: all .2s;
-        }
-
-        .btn-main:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 22px rgba(180, 100, 200, .4);
-        }
-
-        .btn-main:disabled {
-            opacity: .5;
-            cursor: default;
-            transform: none;
-        }
-
-        .btn-soft {
-            background: rgba(255, 255, 255, .7);
-            border: 1.5px solid #f0c0d0;
-            border-radius: 14px;
-            padding: 11px 20px;
-            font-family: 'Nunito', sans-serif;
-            font-size: .9rem;
-            font-weight: 700;
-            color: #b07090;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            transition: all .2s;
-        }
-
-        .btn-soft:hover {
-            background: #fff;
-            border-color: #e07b9a;
-        }
-
-        .btn-row {
-            display: flex;
-            gap: 10px;
-            margin-top: 18px;
-            flex-wrap: wrap;
-        }
-
-        /* ===== GENERATING PAGE ===== */
-        #pg-gen {
-            background: linear-gradient(135deg, #fff0f5, #f0f8ff, #fff5f0);
-        }
-
-        .gen-wrap {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 75vh;
-            gap: 22px;
-            text-align: center;
-        }
-
-        .gen-moon-big {
-            font-size: 62px;
-            animation: moonSway 2s ease-in-out infinite;
-        }
-
-        .gen-label {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.8rem;
-            color: #c06080;
-        }
-
-        .gen-sub {
-            font-size: .88rem;
-            color: #b07090;
-            font-style: italic;
-        }
-
-        .dots {
-            display: flex;
-            gap: 7px;
-            justify-content: center;
-        }
-
-        .dots span {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #f09ab5, #b07ad5);
-            animation: dotBounce .9s ease-in-out infinite;
-        }
-
-        .dots span:nth-child(2) {
-            animation-delay: .15s
-        }
-
-        .dots span:nth-child(3) {
-            animation-delay: .3s
-        }
-
-        @keyframes dotBounce {
-
-            0%,
-            80%,
-            100% {
-                transform: scale(0)
-            }
-
-            40% {
-                transform: scale(1)
-            }
-        }
-
-        .tw-box {
-            background: rgba(255, 255, 255, .82);
-            border: 1.5px solid rgba(255, 190, 210, .6);
-            border-radius: 18px;
-            padding: 20px 22px;
-            max-width: 500px;
-            width: 100%;
-            text-align: left;
-            font-size: .92rem;
-            line-height: 1.82;
-            color: #7a3050;
-            min-height: 60px;
-            display: none;
-        }
-
-        .tw-cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1em;
-            background: #e07b9a;
-            margin-left: 1px;
-            animation: cursorBlink .65s infinite;
-            vertical-align: text-bottom;
-        }
-
-        @keyframes cursorBlink {
-
-            0%,
-            100% {
-                opacity: 1
-            }
-
-            50% {
-                opacity: 0
-            }
-        }
-
-        /* ===== CARD PAGE ===== */
-        #pg-card {
-            background: linear-gradient(135deg, #fff0f5, #f0f8ff, #fff5f0);
-        }
-
-        .card-pg-hdr {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .card-pg-hdr h2 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.55rem;
-            color: #c06080;
-        }
-
-        .card-pg-hdr p {
-            font-size: .82rem;
-            color: #b07090;
-            margin-top: 3px;
-        }
-
-        /* THE CARD ITSELF */
-        .card-shell {
-            border-radius: 22px;
-            overflow: hidden;
-            box-shadow: 0 12px 48px rgba(180, 100, 150, .22);
-            margin-bottom: 18px;
-        }
-
-        #wish-card {
-            padding: 44px 36px 36px;
-            position: relative;
-            overflow: hidden;
-            min-height: 390px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .c-orb {
-            position: absolute;
-            border-radius: 50%;
-            opacity: .17;
-        }
-
-        .c-orb.a {
-            width: 190px;
-            height: 190px;
-            top: -65px;
-            left: -65px;
-        }
-
-        .c-orb.b {
-            width: 140px;
-            height: 140px;
-            bottom: -45px;
-            right: -45px;
-        }
-
-        .c-orb.c {
-            width: 70px;
-            height: 70px;
-            top: 24px;
-            right: 32px;
-        }
-
-        .c-ico {
-            font-size: 46px;
-            margin-bottom: 10px;
-            display: block;
-            animation: pulse 2.2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                transform: scale(1)
-            }
-
-            50% {
-                transform: scale(1.1)
-            }
-        }
-
-        .c-tag {
-            font-size: .67rem;
-            font-weight: 800;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            padding: 4px 14px;
-            border-radius: 50px;
-            margin-bottom: 12px;
-            display: inline-block;
-        }
-
-        .c-arabic {
-            font-size: 1.4rem;
-            margin-bottom: 6px;
-            opacity: .62;
-            letter-spacing: 2px;
-        }
-
-        .c-title {
-            font-family: 'Dancing Script', cursive;
-            font-size: clamp(1.9rem, 6vw, 2.75rem);
-            line-height: 1.15;
-            margin-bottom: 5px;
-        }
-
-        .c-dear {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.1rem;
-            margin-bottom: 14px;
-        }
-
-        /* Editable textarea */
-        .c-wish-area {
-            max-width: 430px;
-            width: 100%;
-            position: relative;
-        }
-
-        #wish-ta {
-            width: 100%;
-            background: transparent;
-            border: none;
-            outline: none;
-            font-family: 'Nunito', sans-serif;
-            font-size: .92rem;
-            line-height: 1.82;
-            font-weight: 400;
-            text-align: center;
-            resize: none;
-            cursor: default;
-            overflow: hidden;
-            min-height: 40px;
-        }
-
-        #wish-ta.edit-mode {
-            cursor: text;
-            background: rgba(255, 255, 255, .25);
-            border-bottom: 1.5px dashed rgba(0, 0, 0, .2);
-            border-radius: 8px;
-            padding: 6px 8px;
-        }
-
-        .edit-btn {
-            margin-top: 7px;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-size: .72rem;
-            font-weight: 700;
-            color: rgba(0, 0, 0, .38);
-            cursor: pointer;
-            background: none;
-            border: none;
-            font-family: 'Nunito', sans-serif;
-            transition: color .2s;
-        }
-
-        .edit-btn:hover {
-            color: rgba(0, 0, 0, .65);
-        }
-
-        .c-footer {
-            margin-top: 18px;
-            font-family: 'Dancing Script', cursive;
-            font-size: .98rem;
-            opacity: .62;
-        }
-
-        /* Action bar */
-        .action-bar {
-            display: flex;
-            gap: 9px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-bottom: 14px;
-        }
-
-        .ab-btn {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 10px 17px;
-            border-radius: 12px;
-            border: none;
-            font-family: 'Nunito', sans-serif;
-            font-size: .83rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all .2s;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, .09);
-        }
-
-        .ab-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(0, 0, 0, .14);
-        }
-
-        .ab-dl {
-            background: linear-gradient(135deg, #ffd6e7, #f9c8ea);
-            color: #9a3060;
-        }
-
-        .ab-re {
-            background: linear-gradient(135deg, #f5e8ff, #e8d0f8);
-            color: #602090;
-        }
-
-        .ab-sh {
-            background: linear-gradient(135deg, #c8e6f5, #b5d8f0);
-            color: #235a80;
-        }
-
-        .ab-cp {
-            background: linear-gradient(135deg, #d5f5e0, #b8eecc);
-            color: #1a6640;
-        }
-
-        #share-box {
-            display: none;
-            background: rgba(255, 255, 255, .8);
-            border: 1.5px solid #c8e0f0;
-            border-radius: 13px;
-            padding: 11px 14px;
-            font-size: .78rem;
-            color: #4a7090;
-            word-break: break-all;
-            text-align: center;
-            margin-bottom: 12px;
-        }
-
-        /* ===== VIEW PAGE ===== */
-        #pg-view {
-            background: linear-gradient(135deg, #fff0f5, #f0f8ff, #fff5f0);
-        }
-
-        /* ===== TOAST ===== */
-        #toast {
-            position: fixed;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%) translateY(70px);
-            background: rgba(50, 18, 38, .9);
-            color: #fff;
-            padding: 10px 24px;
-            border-radius: 50px;
-            font-size: .85rem;
-            font-weight: 700;
-            transition: transform .3s ease;
-            z-index: 9999;
-            pointer-events: none;
-            white-space: nowrap;
-        }
-
-        #toast.show {
-            transform: translateX(-50%) translateY(0);
-        }
-
-        @media(max-width:460px) {
-            #wish-card {
-                padding: 28px 18px 26px
-            }
-
-            .action-bar {
-                gap: 7px
-            }
-
-            .ab-btn {
-                padding: 9px 12px;
-                font-size: .78rem
-            }
-
-            .btn-row {
-                flex-direction: column
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eid Mubarak Wishes 🌙</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; font-family: 'Nunito', sans-serif; overflow: hidden; }
+
+body {
+  background: linear-gradient(135deg, #fff0f5 0%, #f0f8ff 50%, #fff5f0 100%);
+  color: #5a3a4a;
+}
+
+/* ===== PETALS ===== */
+.petal {
+  position: fixed; pointer-events: none; z-index: 0;
+  animation: petalFall linear infinite;
+  font-size: 16px; opacity: 0.5;
+}
+@keyframes petalFall {
+  0%   { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.3; }
+  100% { transform: translateY(105vh) rotate(400deg); opacity: 0; }
+}
+
+/* ===== PAGES ===== */
+.page {
+  position: fixed; inset: 0; z-index: 1;
+  overflow-y: auto; overflow-x: hidden;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 30px 16px 80px;
+  opacity: 0; pointer-events: none;
+  transform: translateX(50px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.page.active {
+  opacity: 1; pointer-events: all; transform: translateX(0);
+}
+.page.slide-out {
+  opacity: 0; transform: translateX(-50px);
+}
+.inner { width: 100%; max-width: 680px; }
+
+/* ===== HEADER ===== */
+.hdr { text-align: center; margin-bottom: 28px; }
+.hdr .moon { font-size: 50px; display: block; animation: moonSway 3s ease-in-out infinite; }
+@keyframes moonSway { 0%,100%{transform:rotate(-10deg)} 50%{transform:rotate(10deg)} }
+.hdr h1 {
+  font-family: 'Dancing Script', cursive; font-size: clamp(2rem,7vw,3rem);
+  background: linear-gradient(135deg,#e07b9a,#9b59b6,#5dade2);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  line-height: 1.2; margin-top: 4px;
+}
+.hdr p { font-size: .88rem; color: #b07090; margin-top: 4px; }
+
+/* ===== PANEL ===== */
+.panel {
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 24px 22px 20px;
+  box-shadow: 0 6px 36px rgba(200,120,160,0.13);
+  border: 1.5px solid rgba(255,190,210,0.4);
+  margin-bottom: 16px;
+}
+.panel-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem; color: #c06080;
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.badge {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: linear-gradient(135deg,#f09ab5,#b07ad5);
+  color: #fff; font-size: .7rem; font-weight: 800;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ===== RELATION GRID ===== */
+.rel-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(108px,1fr)); gap: 9px;
+}
+.rel-card {
+  border: 2px solid transparent; border-radius: 14px;
+  padding: 12px 6px; cursor: pointer;
+  background: #fff0f5;
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  font-size: .82rem; font-weight: 700; color: #5a3a4a;
+  box-shadow: 0 2px 8px rgba(200,130,160,.12);
+  transition: all .2s ease;
+}
+.rel-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(200,130,160,.25); }
+.rel-card.picked { border-color: #e07b9a; background: #ffe0ea; transform: translateY(-2px) scale(1.04); }
+.rel-card span.ico { font-size: 24px; }
+
+/* ===== QUESTIONS ===== */
+.q-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media(max-width:500px){ .q-grid { grid-template-columns: 1fr; } }
+.q-item { display: flex; flex-direction: column; gap: 5px; }
+.q-item.full { grid-column: 1/-1; }
+.q-item label { font-size: .74rem; font-weight: 700; color: #b07090; text-transform: uppercase; letter-spacing: .5px; }
+.q-item input, .q-item select {
+  border: 1.5px solid #f0c0d0; border-radius: 11px;
+  padding: 10px 13px; font-family: 'Nunito', sans-serif; font-size: .92rem;
+  outline: none; background: rgba(255,255,255,.9); color: #5a3a4a;
+  transition: border-color .2s, box-shadow .2s;
+}
+.q-item input:focus, .q-item select:focus {
+  border-color: #e07b9a; box-shadow: 0 0 0 3px rgba(224,123,154,.15);
+}
+
+/* ===== BUTTONS ===== */
+.btn-main {
+  background: linear-gradient(135deg,#f09ab5,#b07ad5); color: #fff;
+  border: none; border-radius: 14px; padding: 13px 28px;
+  font-family: 'Nunito', sans-serif; font-size: .96rem; font-weight: 700;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 7px;
+  box-shadow: 0 4px 14px rgba(180,100,200,.3); transition: all .2s;
+}
+.btn-main:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(180,100,200,.4); }
+.btn-main:disabled { opacity: .5; cursor: default; transform: none; }
+.btn-soft {
+  background: rgba(255,255,255,.7); border: 1.5px solid #f0c0d0;
+  border-radius: 14px; padding: 11px 20px;
+  font-family: 'Nunito', sans-serif; font-size: .9rem; font-weight: 700; color: #b07090;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 7px;
+  transition: all .2s;
+}
+.btn-soft:hover { background: #fff; border-color: #e07b9a; }
+.btn-row { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+
+/* ===== GENERATING PAGE ===== */
+#pg-gen { background: linear-gradient(135deg,#fff0f5,#f0f8ff,#fff5f0); }
+.gen-wrap {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; min-height: 75vh; gap: 22px; text-align: center;
+}
+.gen-moon-big { font-size: 62px; animation: moonSway 2s ease-in-out infinite; }
+.gen-label { font-family: 'Dancing Script',cursive; font-size: 1.8rem; color: #c06080; }
+.gen-sub { font-size: .88rem; color: #b07090; font-style: italic; }
+.dots { display: flex; gap: 7px; justify-content: center; }
+.dots span {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: linear-gradient(135deg,#f09ab5,#b07ad5);
+  animation: dotBounce .9s ease-in-out infinite;
+}
+.dots span:nth-child(2){animation-delay:.15s}
+.dots span:nth-child(3){animation-delay:.3s}
+@keyframes dotBounce{0%,80%,100%{transform:scale(0)}40%{transform:scale(1)}}
+
+.tw-box {
+  background: rgba(255,255,255,.82); border: 1.5px solid rgba(255,190,210,.6);
+  border-radius: 18px; padding: 20px 22px;
+  max-width: 500px; width: 100%; text-align: left;
+  font-size: .92rem; line-height: 1.82; color: #7a3050;
+  min-height: 60px; display: none;
+}
+.tw-cursor {
+  display: inline-block; width: 2px; height: 1em;
+  background: #e07b9a; margin-left: 1px;
+  animation: cursorBlink .65s infinite; vertical-align: text-bottom;
+}
+@keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* ===== CARD PAGE ===== */
+#pg-card { background: linear-gradient(135deg,#fff0f5,#f0f8ff,#fff5f0); }
+.card-pg-hdr { text-align: center; margin-bottom: 20px; }
+.card-pg-hdr h2 { font-family:'Dancing Script',cursive; font-size:1.55rem; color:#c06080; }
+.card-pg-hdr p  { font-size:.82rem; color:#b07090; margin-top:3px; }
+
+/* THE CARD ITSELF */
+.card-shell { border-radius: 22px; overflow: hidden; box-shadow: 0 12px 48px rgba(180,100,150,.22); margin-bottom: 18px; }
+#wish-card {
+  padding: 44px 36px 36px; position: relative; overflow: hidden;
+  min-height: 390px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+}
+.c-orb { position: absolute; border-radius: 50%; opacity: .17; }
+.c-orb.a { width:190px;height:190px;top:-65px;left:-65px; }
+.c-orb.b { width:140px;height:140px;bottom:-45px;right:-45px; }
+.c-orb.c { width:70px;height:70px;top:24px;right:32px; }
+.c-ico { font-size: 46px; margin-bottom: 10px; display: block; animation: pulse 2.2s ease-in-out infinite; }
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.c-tag {
+  font-size: .67rem; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase;
+  padding: 4px 14px; border-radius: 50px; margin-bottom: 12px; display: inline-block;
+}
+.c-arabic { font-size: 1.4rem; margin-bottom: 6px; opacity: .62; letter-spacing: 2px; }
+.c-title { font-family:'Dancing Script',cursive; font-size:clamp(1.9rem,6vw,2.75rem); line-height:1.15; margin-bottom:5px; }
+.c-dear { font-family:'Playfair Display',serif; font-style:italic; font-size:1.1rem; margin-bottom:14px; }
+
+/* Wish display + editable textarea */
+.c-wish-area { max-width: 430px; width: 100%; position: relative; }
+#wish-display {
+  width: 100%; background: transparent;
+  font-family: 'Nunito', sans-serif; font-size: .92rem; line-height: 1.82;
+  font-weight: 400; text-align: center;
+  white-space: pre-wrap; word-wrap: break-word;
+}
+#wish-ta {
+  display: none;
+  width: 100%; background: rgba(255,255,255,.25); border: none; outline: none;
+  border-bottom: 1.5px dashed rgba(0,0,0,.2); border-radius: 8px; padding: 6px 8px;
+  font-family: 'Nunito', sans-serif; font-size: .92rem; line-height: 1.82;
+  font-weight: 400; text-align: center; resize: none; cursor: text;
+  overflow: hidden; min-height: 40px;
+}
+.edit-btn {
+  margin-top: 7px; display: inline-flex; align-items: center; gap: 5px;
+  font-size: .72rem; font-weight: 700; color: rgba(0,0,0,.38);
+  cursor: pointer; background: none; border: none; font-family: 'Nunito',sans-serif;
+  transition: color .2s;
+}
+.edit-btn:hover { color: rgba(0,0,0,.65); }
+.c-footer { margin-top: 18px; font-family:'Dancing Script',cursive; font-size:.98rem; opacity:.62; }
+
+/* Action bar */
+.action-bar { display: flex; gap: 9px; flex-wrap: wrap; justify-content: center; margin-bottom: 14px; }
+.ab-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 10px 17px; border-radius: 12px; border: none;
+  font-family: 'Nunito',sans-serif; font-size: .83rem; font-weight: 700;
+  cursor: pointer; transition: all .2s; box-shadow: 0 3px 10px rgba(0,0,0,.09);
+}
+.ab-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.14); }
+.ab-dl   { background: linear-gradient(135deg,#ffd6e7,#f9c8ea); color: #9a3060; }
+.ab-re   { background: linear-gradient(135deg,#f5e8ff,#e8d0f8); color: #602090; }
+.ab-sh   { background: linear-gradient(135deg,#c8e6f5,#b5d8f0); color: #235a80; }
+.ab-cp   { background: linear-gradient(135deg,#d5f5e0,#b8eecc); color: #1a6640; }
+
+#share-box {
+  display: none; background: rgba(255,255,255,.8); border: 1.5px solid #c8e0f0;
+  border-radius: 13px; padding: 11px 14px; font-size: .78rem; color: #4a7090;
+  word-break: break-all; text-align: center; margin-bottom: 12px;
+}
+
+/* ===== VIEW PAGE ===== */
+#pg-view { background: linear-gradient(135deg,#fff0f5,#f0f8ff,#fff5f0); }
+
+/* ===== TOAST ===== */
+#toast {
+  position: fixed; bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(70px);
+  background: rgba(50,18,38,.9); color: #fff;
+  padding: 10px 24px; border-radius: 50px;
+  font-size: .85rem; font-weight: 700;
+  transition: transform .3s ease; z-index: 9999;
+  pointer-events: none; white-space: nowrap;
+}
+#toast.show { transform: translateX(-50%) translateY(0); }
+
+@media(max-width:460px){
+  #wish-card{padding:28px 18px 26px}
+  .action-bar{gap:7px}
+  .ab-btn{padding:9px 12px;font-size:.78rem}
+  .btn-row{flex-direction:column}
+}
+</style>
 </head>
-
 <body>
 
-    <!-- PETALS -->
-    <div id="petals"></div>
+<!-- PETALS -->
+<div id="petals"></div>
 
-    <!-- =========================================
+<!-- =========================================
      PAGE 1 — PICK RELATION
      ========================================= -->
-    <div class="page active" id="pg-rel">
-        <div class="inner">
-            <div class="hdr">
-                <span class="moon">🌙</span>
-                <h1>Eid Mubarak Wishes</h1>
-                <p>Create a beautiful personalised Eid card for your loved ones ✨</p>
-            </div>
-            <div class="panel">
-                <div class="panel-title"><span class="badge">1</span> Who are you wishing Eid to?</div>
-                <div class="rel-grid" id="rel-grid"></div>
-            </div>
-        </div>
+<div class="page active" id="pg-rel">
+  <div class="inner">
+    <div class="hdr">
+      <span class="moon">🌙</span>
+      <h1>Eid Mubarak Wishes</h1>
+      <p>Create a beautiful personalised Eid card for your loved ones ✨</p>
     </div>
+    <div class="panel">
+      <div class="panel-title"><span class="badge">1</span> Who are you wishing Eid to?</div>
+      <div class="rel-grid" id="rel-grid"></div>
+    </div>
+  </div>
+</div>
 
-    <!-- =========================================
+<!-- =========================================
      PAGE 2 — QUESTIONS
      ========================================= -->
-    <div class="page" id="pg-q">
-        <div class="inner">
-            <div class="hdr">
-                <span class="moon">🌙</span>
-                <h1>Tell Us About Them</h1>
-                <p>The more you share, the more personal the wish 💬</p>
-            </div>
-            <div class="panel">
-                <div class="panel-title"><span class="badge">2</span> About your <span id="ql"
-                        style="margin-left:4px">loved one</span></div>
-                <div class="q-grid" id="q-grid"></div>
-                <div class="btn-row">
-                    <button class="btn-main" onclick="doGenerate()">✨ Generate Wish</button>
-                    <button class="btn-soft" onclick="nav('pg-rel','back')">← Back</button>
-                </div>
-            </div>
-        </div>
+<div class="page" id="pg-q">
+  <div class="inner">
+    <div class="hdr">
+      <span class="moon">🌙</span>
+      <h1>Tell Us About Them</h1>
+      <p>The more you share, the more personal the wish 💬</p>
     </div>
+    <div class="panel">
+      <div class="panel-title"><span class="badge">2</span> About your <span id="ql" style="margin-left:4px">loved one</span></div>
+      <div class="q-grid" id="q-grid"></div>
+      <div class="btn-row">
+        <button class="btn-main" onclick="doGenerate()">✨ Generate Wish</button>
+        <button class="btn-soft" onclick="nav('pg-rel','back')">← Back</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <!-- =========================================
+<!-- =========================================
      PAGE 3 — GENERATING
      ========================================= -->
-    <div class="page" id="pg-gen">
-        <div class="inner">
-            <div class="gen-wrap">
-                <span class="gen-moon-big" id="gen-ico">🌙</span>
-                <div>
-                    <div class="gen-label">Writing your wish…</div>
-                    <div class="gen-sub" id="gen-sub">Crafting something beautiful</div>
-                </div>
-                <div class="dots" id="gen-dots"><span></span><span></span><span></span></div>
-                <div class="tw-box" id="tw-box">
-                    <span id="tw-txt"></span><span class="tw-cursor" id="tw-cur"></span>
-                </div>
-            </div>
-        </div>
+<div class="page" id="pg-gen">
+  <div class="inner">
+    <div class="gen-wrap">
+      <span class="gen-moon-big" id="gen-ico">🌙</span>
+      <div>
+        <div class="gen-label">Writing your wish…</div>
+        <div class="gen-sub" id="gen-sub">Crafting something beautiful</div>
+      </div>
+      <div class="dots" id="gen-dots"><span></span><span></span><span></span></div>
+      <div class="tw-box" id="tw-box">
+        <span id="tw-txt"></span><span class="tw-cursor" id="tw-cur"></span>
+      </div>
     </div>
+  </div>
+</div>
 
-    <!-- =========================================
+<!-- =========================================
      PAGE 4 — CARD
      ========================================= -->
-    <div class="page" id="pg-card">
-        <div class="inner" style="max-width:600px">
-            <div class="card-pg-hdr">
-                <h2>🌸 Your Eid Card is Ready!</h2>
-                <p>Tap ✏️ to edit the message &nbsp;•&nbsp; Download or share below</p>
-            </div>
-
-            <div class="card-shell">
-                <div id="wish-card">
-                    <div class="c-orb a" id="orb-a"></div>
-                    <div class="c-orb b" id="orb-b"></div>
-                    <div class="c-orb c" id="orb-c"></div>
-                    <span class="c-ico" id="c-ico"></span>
-                    <span class="c-tag" id="c-tag"></span>
-                    <div class="c-arabic" id="c-arabic">عيد مبارك</div>
-                    <div class="c-title" id="c-title">Eid Mubarak</div>
-                    <div class="c-dear" id="c-dear"></div>
-                    <div class="c-wish-area">
-                        <textarea id="wish-ta" rows="5" readonly></textarea>
-                        <button class="edit-btn" id="edit-btn" onclick="toggleEdit()">✏️ <span id="edit-lbl">Tap to edit
-                                message</span></button>
-                    </div>
-                    <div class="c-footer" id="c-footer">🌙 With love &amp; prayers 🌙</div>
-                </div>
-            </div>
-
-            <div class="action-bar">
-                <button class="ab-btn ab-dl" onclick="dlCard()">⬇️ Download PNG</button>
-                <button class="ab-btn ab-re" onclick="doGenerate()">🔄 Regenerate</button>
-                <button class="ab-btn ab-sh" onclick="makeLink()">🔗 Share Link</button>
-                <button class="ab-btn ab-cp" id="cp-btn" style="display:none" onclick="copyLink()">📋 Copy Link</button>
-            </div>
-            <div id="share-box"></div>
-
-            <div style="text-align:center;margin-top:10px">
-                <button class="btn-soft" onclick="nav('pg-rel','back')">🌙 Make Another Wish</button>
-            </div>
-        </div>
+<div class="page" id="pg-card">
+  <div class="inner" style="max-width:600px">
+    <div class="card-pg-hdr">
+      <h2>🌸 Your Eid Card is Ready!</h2>
+      <p>Tap ✏️ to edit the message &nbsp;•&nbsp; Download or share below</p>
     </div>
 
-    <!-- =========================================
+    <div class="card-shell">
+      <div id="wish-card">
+        <div class="c-orb a" id="orb-a"></div>
+        <div class="c-orb b" id="orb-b"></div>
+        <div class="c-orb c" id="orb-c"></div>
+        <span class="c-ico"  id="c-ico"></span>
+        <span class="c-tag"  id="c-tag"></span>
+        <div  class="c-arabic"   id="c-arabic">عيد مبارك</div>
+        <div  class="c-title"    id="c-title">Eid Mubarak</div>
+        <div  class="c-dear"     id="c-dear"></div>
+        <div  class="c-wish-area">
+          <div id="wish-display"></div>
+          <textarea id="wish-ta" rows="5"></textarea>
+          <button class="edit-btn" id="edit-btn" onclick="toggleEdit()">✏️ <span id="edit-lbl">Tap to edit message</span></button>
+        </div>
+        <div class="c-footer" id="c-footer">🌙 With love &amp; prayers 🌙</div>
+      </div>
+    </div>
+
+    <div class="action-bar">
+      <button class="ab-btn ab-dl" onclick="dlCard()">⬇️ Download PNG</button>
+      <button class="ab-btn ab-re" onclick="doGenerate()">🔄 Regenerate</button>
+      <button class="ab-btn ab-sh" onclick="makeLink()">🔗 Share Link</button>
+      <button class="ab-btn ab-cp" id="cp-btn" style="display:none" onclick="copyLink()">📋 Copy Link</button>
+    </div>
+    <div id="share-box"></div>
+
+    <div style="text-align:center;margin-top:10px">
+      <button class="btn-soft" onclick="nav('pg-rel','back')">🌙 Make Another Wish</button>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================
      PAGE 5 — VIEW (shared link)
      ========================================= -->
-    <div class="page" id="pg-view">
-        <div class="inner" style="max-width:600px;text-align:center">
-            <div class="hdr">
-                <span class="moon">🌙</span>
-                <h1>Eid Mubarak!</h1>
-                <p>Someone sent you a special Eid wish 💌</p>
-            </div>
-            <div class="card-shell">
-                <div id="view-card"
-                    style="padding:44px 34px 36px;position:relative;overflow:hidden;min-height:380px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
-                </div>
-            </div>
-            <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px">
-                <button class="ab-btn ab-dl" id="view-dl">⬇️ Save as PNG</button>
-                <button class="btn-soft" onclick="goHome()">🌙 Send Your Own Wish</button>
-            </div>
-        </div>
+<div class="page" id="pg-view">
+  <div class="inner" style="max-width:600px;text-align:center">
+    <div class="hdr">
+      <span class="moon">🌙</span>
+      <h1>Eid Mubarak!</h1>
+      <p>Someone sent you a special Eid wish 💌</p>
     </div>
+    <div class="card-shell">
+      <div id="view-card" style="padding:44px 34px 36px;position:relative;overflow:hidden;min-height:380px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center"></div>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px">
+      <button class="ab-btn ab-dl" id="view-dl">⬇️ Save as PNG</button>
+      <button class="btn-soft" onclick="goHome()">🌙 Send Your Own Wish</button>
+    </div>
+  </div>
+</div>
 
-    <div id="toast"></div>
+<div id="toast"></div>
 
-    <script>
-        // =====================================================
-        // RELATION DATA
-        // =====================================================
-        const RELS = [
-            {
-                id: 'mother', label: 'Mother', ico: '👩',
-                bg: 'linear-gradient(155deg,#fff0f5,#fdd5e5,#f9c0e2)',
-                o1: '#f9b8d0', o2: '#f5a0c0', o3: '#fbd0e5',
-                tag: '#fcc8dc', tagC: '#b04070', tc: '#c05075', bc: '#7a3050', fc: '#d080a0'
-            },
-            {
-                id: 'father', label: 'Father', ico: '👨',
-                bg: 'linear-gradient(155deg,#e8f5fd,#cde8f8,#b8d8f5)',
-                o1: '#a0cee8', o2: '#80b8e0', o3: '#b8d8f0',
-                tag: '#b0d8f0', tagC: '#2a607a', tc: '#2a7090', bc: '#2a5070', fc: '#4a90b0'
-            },
-            {
-                id: 'brother', label: 'Brother', ico: '👦',
-                bg: 'linear-gradient(155deg,#edfaf0,#c8eecc,#b0e5b8)',
-                o1: '#a0d8a8', o2: '#80c888', o3: '#b8e8c0',
-                tag: '#b8e8c0', tagC: '#1a6030', tc: '#1a7035', bc: '#1a5028', fc: '#38904a'
-            },
-            {
-                id: 'sister', label: 'Sister', ico: '👧',
-                bg: 'linear-gradient(155deg,#fff5fd,#f8d0f0,#f0b8e8)',
-                o1: '#f0a8e0', o2: '#e880d0', o3: '#f5c8ec',
-                tag: '#f5c0e8', tagC: '#8a2070', tc: '#a02875', bc: '#7a205a', fc: '#c848a0'
-            },
-            {
-                id: 'grandma', label: 'Grandma', ico: '👵',
-                bg: 'linear-gradient(155deg,#fffdf0,#faeac8,#f5dca0)',
-                o1: '#f0d888', o2: '#e8c860', o3: '#f5e0a8',
-                tag: '#f5e0a0', tagC: '#806010', tc: '#9a7010', bc: '#705010', fc: '#c09030'
-            },
-            {
-                id: 'grandpa', label: 'Grandpa', ico: '👴',
-                bg: 'linear-gradient(155deg,#f5f5ff,#dcdcf8,#c8c8f0)',
-                o1: '#b8b8e8', o2: '#9898d8', o3: '#c8c8f0',
-                tag: '#c8c8f0', tagC: '#303090', tc: '#303090', bc: '#282878', fc: '#5050b8'
-            },
-            {
-                id: 'uncle', label: 'Uncle', ico: '🧔',
-                bg: 'linear-gradient(155deg,#edfaf8,#c8ece8,#a8e0d8)',
-                o1: '#90d0c8', o2: '#68b8b0', o3: '#b0dcd8',
-                tag: '#a8e0d8', tagC: '#0a5850', tc: '#0a6860', bc: '#085048', fc: '#288880'
-            },
-            {
-                id: 'aunt', label: 'Aunt', ico: '👩‍🦱',
-                bg: 'linear-gradient(155deg,#fff5ee,#f8dfc8,#f0c8a0)',
-                o1: '#e8b888', o2: '#e0a060', o3: '#f0c8a8',
-                tag: '#f0c8a0', tagC: '#8a4010', tc: '#9a4810', bc: '#783808', fc: '#c87030'
-            },
-            {
-                id: 'friend', label: 'Friend', ico: '🤝',
-                bg: 'linear-gradient(155deg,#f5fbff,#d0e8f8,#b8daf5)',
-                o1: '#a0ccf0', o2: '#78b0e8', o3: '#b8d8f5',
-                tag: '#b8d8f5', tagC: '#1a5090', tc: '#1a5090', bc: '#183870', fc: '#3070c0'
-            },
-            {
-                id: 'family', label: 'Family', ico: '👨‍👩‍👧‍👦',
-                bg: 'linear-gradient(155deg,#fff5fd,#f8d0f0,#f0b0e5)',
-                o1: '#e898d8', o2: '#d870c8', o3: '#f0b8e8',
-                tag: '#f5b8e8', tagC: '#801868', tc: '#901870', bc: '#681258', fc: '#c038a0'
-            },
-            {
-                id: 'colleague', label: 'Colleague', ico: '💼',
-                bg: 'linear-gradient(155deg,#f8f5ff,#e0d0f8,#ccc0f0)',
-                o1: '#b8a8e8', o2: '#9880d8', o3: '#c8b8f0',
-                tag: '#d0c0f5', tagC: '#402890', tc: '#402890', bc: '#302070', fc: '#6848c0'
-            },
-            {
-                id: 'teacher', label: 'Teacher', ico: '📚',
-                bg: 'linear-gradient(155deg,#fffaf5,#fae0c8,#f5caa8)',
-                o1: '#f0b888', o2: '#e8a060', o3: '#f5c8a8',
-                tag: '#f5c8a0', tagC: '#8a2808', tc: '#9a3010', bc: '#782808', fc: '#d05820'
-            },
-            {
-                id: 'neighbor', label: 'Neighbor', ico: '🏠',
-                bg: 'linear-gradient(155deg,#f0fff5,#c8f0d8,#b0eac8)',
-                o1: '#98e0b0', o2: '#70d098', o3: '#b0e8c8',
-                tag: '#b0e8c8', tagC: '#0a6028', tc: '#0a7030', bc: '#085020', fc: '#28a848'
-            },
-            {
-                id: 'spouse', label: 'Spouse', ico: '💑',
-                bg: 'linear-gradient(155deg,#fff5fa,#fdd0e8,#f9b8de)',
-                o1: '#f8a0cc', o2: '#f070b0', o3: '#f9c0dc',
-                tag: '#f9b8d8', tagC: '#900840', tc: '#a00848', bc: '#780838', fc: '#d02868'
-            },
-        ];
+<script>
+// =====================================================
+// RELATION DATA
+// =====================================================
+const RELS = [
+  { id:'mother',   label:'Mother',    ico:'👩',
+    bg:'linear-gradient(155deg,#fff0f5,#fdd5e5,#f9c0e2)',
+    o1:'#f9b8d0', o2:'#f5a0c0', o3:'#fbd0e5',
+    tag:'#fcc8dc', tagC:'#b04070', tc:'#c05075', bc:'#7a3050', fc:'#d080a0' },
+  { id:'father',   label:'Father',    ico:'👨',
+    bg:'linear-gradient(155deg,#e8f5fd,#cde8f8,#b8d8f5)',
+    o1:'#a0cee8', o2:'#80b8e0', o3:'#b8d8f0',
+    tag:'#b0d8f0', tagC:'#2a607a', tc:'#2a7090', bc:'#2a5070', fc:'#4a90b0' },
+  { id:'brother',  label:'Brother',   ico:'👦',
+    bg:'linear-gradient(155deg,#edfaf0,#c8eecc,#b0e5b8)',
+    o1:'#a0d8a8', o2:'#80c888', o3:'#b8e8c0',
+    tag:'#b8e8c0', tagC:'#1a6030', tc:'#1a7035', bc:'#1a5028', fc:'#38904a' },
+  { id:'sister',   label:'Sister',    ico:'👧',
+    bg:'linear-gradient(155deg,#fff5fd,#f8d0f0,#f0b8e8)',
+    o1:'#f0a8e0', o2:'#e880d0', o3:'#f5c8ec',
+    tag:'#f5c0e8', tagC:'#8a2070', tc:'#a02875', bc:'#7a205a', fc:'#c848a0' },
+  { id:'grandma',  label:'Grandma',   ico:'👵',
+    bg:'linear-gradient(155deg,#fffdf0,#faeac8,#f5dca0)',
+    o1:'#f0d888', o2:'#e8c860', o3:'#f5e0a8',
+    tag:'#f5e0a0', tagC:'#806010', tc:'#9a7010', bc:'#705010', fc:'#c09030' },
+  { id:'grandpa',  label:'Grandpa',   ico:'👴',
+    bg:'linear-gradient(155deg,#f5f5ff,#dcdcf8,#c8c8f0)',
+    o1:'#b8b8e8', o2:'#9898d8', o3:'#c8c8f0',
+    tag:'#c8c8f0', tagC:'#303090', tc:'#303090', bc:'#282878', fc:'#5050b8' },
+  { id:'uncle',    label:'Uncle',     ico:'🧔',
+    bg:'linear-gradient(155deg,#edfaf8,#c8ece8,#a8e0d8)',
+    o1:'#90d0c8', o2:'#68b8b0', o3:'#b0dcd8',
+    tag:'#a8e0d8', tagC:'#0a5850', tc:'#0a6860', bc:'#085048', fc:'#288880' },
+  { id:'aunt',     label:'Aunt',      ico:'👩‍🦱',
+    bg:'linear-gradient(155deg,#fff5ee,#f8dfc8,#f0c8a0)',
+    o1:'#e8b888', o2:'#e0a060', o3:'#f0c8a8',
+    tag:'#f0c8a0', tagC:'#8a4010', tc:'#9a4810', bc:'#783808', fc:'#c87030' },
+  { id:'friend',   label:'Friend',    ico:'🤝',
+    bg:'linear-gradient(155deg,#f5fbff,#d0e8f8,#b8daf5)',
+    o1:'#a0ccf0', o2:'#78b0e8', o3:'#b8d8f5',
+    tag:'#b8d8f5', tagC:'#1a5090', tc:'#1a5090', bc:'#183870', fc:'#3070c0' },
+  { id:'family',   label:'Family',    ico:'👨‍👩‍👧‍👦',
+    bg:'linear-gradient(155deg,#fff5fd,#f8d0f0,#f0b0e5)',
+    o1:'#e898d8', o2:'#d870c8', o3:'#f0b8e8',
+    tag:'#f5b8e8', tagC:'#801868', tc:'#901870', bc:'#681258', fc:'#c038a0' },
+  { id:'colleague',label:'Colleague', ico:'💼',
+    bg:'linear-gradient(155deg,#f8f5ff,#e0d0f8,#ccc0f0)',
+    o1:'#b8a8e8', o2:'#9880d8', o3:'#c8b8f0',
+    tag:'#d0c0f5', tagC:'#402890', tc:'#402890', bc:'#302070', fc:'#6848c0' },
+  { id:'teacher',  label:'Teacher',   ico:'📚',
+    bg:'linear-gradient(155deg,#fffaf5,#fae0c8,#f5caa8)',
+    o1:'#f0b888', o2:'#e8a060', o3:'#f5c8a8',
+    tag:'#f5c8a0', tagC:'#8a2808', tc:'#9a3010', bc:'#782808', fc:'#d05820' },
+  { id:'neighbor', label:'Neighbor',  ico:'🏠',
+    bg:'linear-gradient(155deg,#f0fff5,#c8f0d8,#b0eac8)',
+    o1:'#98e0b0', o2:'#70d098', o3:'#b0e8c8',
+    tag:'#b0e8c8', tagC:'#0a6028', tc:'#0a7030', bc:'#085020', fc:'#28a848' },
+  { id:'spouse',   label:'Spouse',    ico:'💑',
+    bg:'linear-gradient(155deg,#fff5fa,#fdd0e8,#f9b8de)',
+    o1:'#f8a0cc', o2:'#f070b0', o3:'#f9c0dc',
+    tag:'#f9b8d8', tagC:'#900840', tc:'#a00848', bc:'#780838', fc:'#d02868' },
+];
 
-        // =====================================================
-        // QUESTIONS PER RELATION
-        // =====================================================
-        const QS = {
-            mother: [
-                { id: 'name', lbl: "Her name", ph: 'e.g. Ammi, Amna', full: false },
-                { id: 'trait', lbl: "Her most special quality", ph: 'e.g. caring, patient, strong', full: false },
-                { id: 'memory', lbl: "Something she does you love", ph: 'e.g. her cooking, her duas, her hugs', full: true },
-                { id: 'prayer', lbl: "Your wish for her", ph: 'e.g. good health, long life', full: false },
-            ],
-            father: [
-                { id: 'name', lbl: "His name", ph: 'e.g. Abbu, Baba', full: false },
-                { id: 'trait', lbl: "Something special about him", ph: 'e.g. hardworking, wise', full: false },
-                { id: 'sacrifice', lbl: "A sacrifice he made", ph: 'e.g. worked so hard for us', full: true },
-                { id: 'prayer', lbl: "Your prayer for him", ph: 'e.g. health, peace', full: false },
-            ],
-            brother: [
-                { id: 'name', lbl: "His name", ph: 'e.g. Bhai, Zain', full: false },
-                { id: 'age', lbl: "Older or younger?", type: 'sel', opts: ['Older brother', 'Younger brother', 'We are twins'], full: false },
-                { id: 'vibe', lbl: "Your relationship", type: 'sel', opts: ['Best friends', 'Playful rivals', 'He is protective', 'Silly & chaotic'], full: false },
-                { id: 'thing', lbl: "Something only you two share", ph: 'e.g. gaming, cricket, jokes', full: true },
-            ],
-            sister: [
-                { id: 'name', lbl: "Her name", ph: 'e.g. Apa, Sana, Baji', full: false },
-                { id: 'age', lbl: "Older or younger?", type: 'sel', opts: ['Older sister', 'Younger sister', 'We are twins'], full: false },
-                { id: 'trait', lbl: "Her best quality", ph: 'e.g. bold, creative, kind', full: false },
-                { id: 'thing', lbl: "Something only you two share", ph: 'e.g. midnight talks, our playlist', full: true },
-            ],
-            grandma: [
-                { id: 'name', lbl: "What you call her", ph: 'e.g. Dadi, Nani, Amma', full: false },
-                { id: 'thing', lbl: "What makes her unforgettable", ph: 'e.g. her stories, her cooking, her duas', full: true },
-                { id: 'feeling', lbl: "How she makes you feel", ph: 'e.g. safe, loved, at home', full: false },
-                { id: 'prayer', lbl: "Your wish for her", ph: 'e.g. long life, good health', full: false },
-            ],
-            grandpa: [
-                { id: 'name', lbl: "What you call him", ph: 'e.g. Dada, Nana, Baba', full: false },
-                { id: 'thing', lbl: "Something memorable about him", ph: 'e.g. his stories, his wisdom, his faith', full: true },
-                { id: 'feeling', lbl: "What he means to you", ph: 'e.g. my role model, my hero', full: false },
-                { id: 'prayer', lbl: "Your prayer for him", ph: 'e.g. health, peace, comfort', full: false },
-            ],
-            uncle: [
-                { id: 'name', lbl: "His name or what you call him", ph: 'e.g. Chachu, Mamoo, Uncle Rafiq', full: false },
-                { id: 'trait', lbl: "His personality", ph: 'e.g. funny, generous, wise', full: false },
-                { id: 'memory', lbl: "A happy memory with him", ph: 'e.g. Eid at his place, road trips', full: true },
-            ],
-            aunt: [
-                { id: 'name', lbl: "Her name or what you call her", ph: 'e.g. Khala, Chachi, Aunty Nadia', full: false },
-                { id: 'trait', lbl: "What you love about her", ph: 'e.g. warm, nurturing, great cook', full: false },
-                { id: 'memory', lbl: "A special memory with her", ph: 'e.g. her food, her stories', full: true },
-            ],
-            friend: [
-                { id: 'name', lbl: "Their name", ph: 'e.g. Ali, Sara, Yaar', full: false },
-                { id: 'howlong', lbl: "How long friends?", type: 'sel', opts: ['Childhood friends', 'School/college friends', 'A few years', 'New but close'], full: false },
-                { id: 'vibe', lbl: "Your friendship vibe", type: 'sel', opts: ['Silly & fun', 'Deep & emotional', 'Adventure buddies', 'Work/study friends'], full: false },
-                { id: 'thing', lbl: "Something only you two know", ph: 'e.g. inside jokes, a crazy memory', full: true },
-            ],
-            family: [
-                { id: 'name', lbl: "How to address them", ph: 'e.g. My dear family, Everyone', full: false },
-                { id: 'size', lbl: "Family type", type: 'sel', opts: ['Nuclear family', 'Joint family', 'Extended family'], full: false },
-                { id: 'feeling', lbl: "What you love most about your family", ph: 'e.g. their support, togetherness, love', full: true },
-            ],
-            colleague: [
-                { id: 'name', lbl: "Their name", ph: 'e.g. Bilal, Ayesha', full: false },
-                { id: 'role', lbl: "Your work relation", type: 'sel', opts: ['Close teammate', 'My manager', 'My subordinate', 'Cross-team friend'], full: false },
-                { id: 'trait', lbl: "Something great about them", ph: 'e.g. always helpful, positive, full of ideas', full: true },
-            ],
-            teacher: [
-                { id: 'name', lbl: "Their name or title", ph: 'e.g. Sir Ahmed, Miss Nadia', full: false },
-                { id: 'subject', lbl: "What they taught you", ph: 'e.g. Maths, Urdu, Science', full: false },
-                { id: 'impact', lbl: "How they impacted you", ph: 'e.g. gave me confidence, made me love reading', full: true },
-            ],
-            neighbor: [
-                { id: 'name', lbl: "Their name", ph: 'e.g. Uncle Hassan, Aunty Fatima', full: false },
-                { id: 'trait', lbl: "What they are like", ph: 'e.g. kind, always welcoming, generous', full: false },
-                { id: 'thing', lbl: "Something nice they do", ph: 'e.g. sends food on Eid, always greets warmly', full: true },
-            ],
-            spouse: [
-                { id: 'name', lbl: "Their name", ph: 'e.g. Hania, Usama, Jaan', full: false },
-                { id: 'married', lbl: "How long together?", type: 'sel', opts: ['Newly married', '1–3 years', '4–10 years', '10+ years'], full: false },
-                { id: 'trait', lbl: "What you love most", ph: 'e.g. their calm, their smile, their strength', full: false },
-                { id: 'wish', lbl: "Your wish for them", ph: 'e.g. happiness, health, our dreams together', full: true },
-            ],
-        };
+// =====================================================
+// QUESTIONS PER RELATION
+// =====================================================
+const QS = {
+  mother:[
+    {id:'name',   lbl:"Her name",               ph:'e.g. Ammi, Amna',          full:false},
+    {id:'trait',  lbl:"Her most special quality",ph:'e.g. caring, patient, strong',full:false},
+    {id:'memory', lbl:"Something she does you love",ph:'e.g. her cooking, her duas, her hugs',full:true},
+    {id:'prayer', lbl:"Your wish for her",        ph:'e.g. good health, long life',full:false},
+  ],
+  father:[
+    {id:'name',     lbl:"His name",              ph:'e.g. Abbu, Baba',          full:false},
+    {id:'trait',    lbl:"Something special about him",ph:'e.g. hardworking, wise',full:false},
+    {id:'sacrifice',lbl:"A sacrifice he made",   ph:'e.g. worked so hard for us',full:true},
+    {id:'prayer',   lbl:"Your prayer for him",   ph:'e.g. health, peace',        full:false},
+  ],
+  brother:[
+    {id:'name',  lbl:"His name",                 ph:'e.g. Bhai, Zain',          full:false},
+    {id:'age',   lbl:"Older or younger?",        type:'sel',opts:['Older brother','Younger brother','We are twins'],full:false},
+    {id:'vibe',  lbl:"Your relationship",        type:'sel',opts:['Best friends','Playful rivals','He is protective','Silly & chaotic'],full:false},
+    {id:'thing', lbl:"Something only you two share",ph:'e.g. gaming, cricket, jokes',full:true},
+  ],
+  sister:[
+    {id:'name',  lbl:"Her name",                 ph:'e.g. Apa, Sana, Baji',     full:false},
+    {id:'age',   lbl:"Older or younger?",        type:'sel',opts:['Older sister','Younger sister','We are twins'],full:false},
+    {id:'trait', lbl:"Her best quality",         ph:'e.g. bold, creative, kind', full:false},
+    {id:'thing', lbl:"Something only you two share",ph:'e.g. midnight talks, our playlist',full:true},
+  ],
+  grandma:[
+    {id:'name',   lbl:"What you call her",       ph:'e.g. Dadi, Nani, Amma',    full:false},
+    {id:'thing',  lbl:"What makes her unforgettable",ph:'e.g. her stories, her cooking, her duas',full:true},
+    {id:'feeling',lbl:"How she makes you feel",  ph:'e.g. safe, loved, at home', full:false},
+    {id:'prayer', lbl:"Your wish for her",       ph:'e.g. long life, good health',full:false},
+  ],
+  grandpa:[
+    {id:'name',   lbl:"What you call him",       ph:'e.g. Dada, Nana, Baba',    full:false},
+    {id:'thing',  lbl:"Something memorable about him",ph:'e.g. his stories, his wisdom, his faith',full:true},
+    {id:'feeling',lbl:"What he means to you",   ph:'e.g. my role model, my hero', full:false},
+    {id:'prayer', lbl:"Your prayer for him",     ph:'e.g. health, peace, comfort',full:false},
+  ],
+  uncle:[
+    {id:'name',  lbl:"His name or what you call him",ph:'e.g. Chachu, Mamoo, Uncle Rafiq',full:false},
+    {id:'trait', lbl:"His personality",          ph:'e.g. funny, generous, wise', full:false},
+    {id:'memory',lbl:"A happy memory with him",  ph:'e.g. Eid at his place, road trips',full:true},
+  ],
+  aunt:[
+    {id:'name',  lbl:"Her name or what you call her",ph:'e.g. Khala, Chachi, Aunty Nadia',full:false},
+    {id:'trait', lbl:"What you love about her",  ph:'e.g. warm, nurturing, great cook',full:false},
+    {id:'memory',lbl:"A special memory with her",ph:'e.g. her food, her stories',  full:true},
+  ],
+  friend:[
+    {id:'name',   lbl:"Their name",              ph:'e.g. Ali, Sara, Yaar',      full:false},
+    {id:'howlong',lbl:"How long friends?",       type:'sel',opts:['Childhood friends','School/college friends','A few years','New but close'],full:false},
+    {id:'vibe',   lbl:"Your friendship vibe",    type:'sel',opts:['Silly & fun','Deep & emotional','Adventure buddies','Work/study friends'],full:false},
+    {id:'thing',  lbl:"Something only you two know",ph:'e.g. inside jokes, a crazy memory',full:true},
+  ],
+  family:[
+    {id:'name',   lbl:"How to address them",     ph:'e.g. My dear family, Everyone',full:false},
+    {id:'size',   lbl:"Family type",             type:'sel',opts:['Nuclear family','Joint family','Extended family'],full:false},
+    {id:'feeling',lbl:"What you love most about your family",ph:'e.g. their support, togetherness, love',full:true},
+  ],
+  colleague:[
+    {id:'name', lbl:"Their name",                ph:'e.g. Bilal, Ayesha',        full:false},
+    {id:'role', lbl:"Your work relation",        type:'sel',opts:['Close teammate','My manager','My subordinate','Cross-team friend'],full:false},
+    {id:'trait',lbl:"Something great about them",ph:'e.g. always helpful, positive, full of ideas',full:true},
+  ],
+  teacher:[
+    {id:'name',   lbl:"Their name or title",     ph:'e.g. Sir Ahmed, Miss Nadia', full:false},
+    {id:'subject',lbl:"What they taught you",    ph:'e.g. Maths, Urdu, Science',  full:false},
+    {id:'impact', lbl:"How they impacted you",   ph:'e.g. gave me confidence, made me love reading',full:true},
+  ],
+  neighbor:[
+    {id:'name',  lbl:"Their name",               ph:'e.g. Uncle Hassan, Aunty Fatima',full:false},
+    {id:'trait', lbl:"What they are like",       ph:'e.g. kind, always welcoming, generous',full:false},
+    {id:'thing', lbl:"Something nice they do",   ph:'e.g. sends food on Eid, always greets warmly',full:true},
+  ],
+  spouse:[
+    {id:'name',   lbl:"Their name",              ph:'e.g. Hania, Usama, Jaan',   full:false},
+    {id:'married',lbl:"How long together?",      type:'sel',opts:['Newly married','1–3 years','4–10 years','10+ years'],full:false},
+    {id:'trait',  lbl:"What you love most",      ph:'e.g. their calm, their smile, their strength',full:false},
+    {id:'wish',   lbl:"Your wish for them",      ph:'e.g. happiness, health, our dreams together',full:true},
+  ],
+};
 
-        // =====================================================
-        // WISH TEMPLATES
-        // =====================================================
-        function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+// =====================================================
+// WISH TEMPLATES
+// =====================================================
+function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 
-        function buildWish(relId, a) {
-            const n = a.name || RELS.find(r => r.id === relId).label;
-            const bl = pick([
-                'May Allah accept all your duas and fill your life with endless barakah',
-                'May this Eid bring you the peace and happiness your heart truly deserves',
-                'May Allah shower His mercy upon you and answer every prayer you have ever whispered',
-                'May the light of this Eid illuminate every corner of your life',
-                'May Allah bless you with health, happiness, and every joy in this world and the next',
-                'May your heart always be full and your home always bright with Allah\'s noor',
-                'May this Eid be the beginning of a year filled with answered prayers and beautiful moments',
-            ]);
+function buildWish(relId, a){
+  const n  = a.name    || RELS.find(r=>r.id===relId).label;
+  const bl = pick([
+    'May Allah accept all your duas and fill your life with endless barakah',
+    'May this Eid bring you the peace and happiness your heart truly deserves',
+    'May Allah shower His mercy upon you and answer every prayer you have ever whispered',
+    'May the light of this Eid illuminate every corner of your life',
+    'May Allah bless you with health, happiness, and every joy in this world and the next',
+    'May your heart always be full and your home always bright with Allah\'s noor',
+    'May this Eid be the beginning of a year filled with answered prayers and beautiful moments',
+  ]);
 
-            const T = {
-                mother: [
-                    () => `Your love has always been the warmest shelter in every storm — ${a.trait ? 'your ' + a.trait + ' spirit is something I will forever look up to' : 'and I am so endlessly grateful for it'}. ${a.memory ? 'Every time I think of ' + a.memory + ', my heart fills with a warmth only you can give.' : 'The love you pour into every small moment means the world to me.'} ${a.prayer ? 'This Eid, I pray for ' + a.prayer + ' for you — you deserve every bit of it and more.' : bl + ', Ammi.'} Eid Mubarak! 🌸`,
-                    () => `${a.memory ? 'From ' + a.memory + ' to every quiet sacrifice you have made,' : 'From every sacrifice you have made to every prayer you have whispered for me,'} you have always been my greatest blessing. ${a.trait ? 'Your ' + a.trait + ' heart is something I admire more than words can ever say.' : 'There is simply no one like you in this world.'} ${bl}. Eid Mubarak, Ammi! 💕`,
-                ],
-                father: [
-                    () => `${a.sacrifice ? 'The way you ' + a.sacrifice + ' without a single complaint taught me what it truly means to love' : 'Every sacrifice you have made for this family has shaped who I am today'}. ${a.trait ? 'Your ' + a.trait + ' nature is something I admire deeply and aspire to every single day.' : 'You have always been my greatest role model.'} ${a.prayer ? 'This Eid, my prayer for you is ' + a.prayer : bl}. Eid Mubarak, Abbu! 🌙`,
-                    () => `You have always led by example — ${a.trait ? 'your ' + a.trait + ' character has been my compass in life' : 'your strength and wisdom have guided me at every step'}. ${a.sacrifice ? 'I will never forget how you ' + a.sacrifice + ' for us.' : 'The things you have done for this family are more than I could ever repay.'} ${bl}. Eid Mubarak, Abbu! 🤲`,
-                ],
-                brother: [
-                    () => `Having you as my ${a.age ? a.age.replace(' brother', '').toLowerCase() : ''} brother is one of the greatest gifts in my life. ${a.thing ? 'Our shared love for ' + a.thing + ' is something that makes every day with you a memory worth keeping.' : 'Every memory we have made together is something I treasure deeply.'} ${a.vibe ? a.vibe.includes('Best') ? 'We are not just brothers — we are best friends, and nothing will ever change that.' : a.vibe.includes('rival') ? 'We may argue like rivals but everyone knows we would do anything for each other.' : a.vibe.includes('protect') ? 'Your protectiveness has always made me feel safe and I am so grateful for that.' : 'Our energy together is wonderfully chaotic and I would not trade it for anything.' : ''} ${bl}. Eid Mubarak, bhai! 🎉`,
-                ],
-                sister: [
-                    () => `${a.trait ? 'Your ' + a.trait + ' spirit is one of the things I admire most about you' : 'You are one of the most remarkable people in my life'}, and this Eid I want you to know how deeply you are loved. ${a.thing ? 'Only we understand what ' + a.thing + ' truly means, and that is something no one can take from us.' : 'The bond we share is something truly precious.'} ${bl}. Eid Mubarak! 💜`,
-                    () => `${a.age === 'Older sister' ? 'You have always been my guide, my example, and my safe place.' : a.age === 'Younger sister' ? 'Watching you grow into the person you are today fills me with the most incredible pride.' : 'Having you as my twin means I have always had a best friend by my side.'} ${a.thing ? 'Our ' + a.thing + ' is something only we share, and I cherish it more than you know.' : ''} ${a.trait ? 'Your ' + a.trait + ' heart makes the world a better place.' : ''} ${bl}. Eid Mubarak! 🌸`,
-                ],
-                grandma: [
-                    () => `${a.thing ? 'Every time I experience ' + a.thing + ', I feel your love wrapped warmly around me' : 'Your love is the kind that stays with a person for a lifetime'}. ${a.feeling ? 'You have always made me feel ' + a.feeling + ', and there is no greater gift than that.' : 'The feeling of being loved by you is one of the most precious things I have ever known.'} ${a.prayer ? 'This Eid, I pray for ' + a.prayer + ' for you — every comfort and every joy.' : bl}. Eid Mubarak! 🤍`,
-                ],
-                grandpa: [
-                    () => `${a.thing ? 'Your ' + a.thing + ' has shaped our entire family in ways you may not even realise' : 'Your wisdom and faith have been the foundation of our family'}. ${a.feeling ? 'You mean ' + a.feeling + ' to all of us, and we are so grateful to have you.' : 'We look up to you more than words can ever express.'} ${a.prayer ? 'This Eid, my prayer is ' + a.prayer + ' for you' : bl}. Eid Mubarak! 🌙`,
-                ],
-                uncle: [
-                    () => `${a.trait ? 'Your ' + a.trait + ' personality has always made every gathering brighter and warmer' : 'You have always brought so much joy to every family gathering'}. ${a.memory ? 'I still smile every time I think of ' + a.memory + ' — those moments are ones I will always treasure.' : 'The memories we have made together are ones I hold very close to my heart.'} ${bl}. Eid Mubarak! 🌿`,
-                ],
-                aunt: [
-                    () => `${a.trait ? 'Your ' + a.trait + ' warmth has always made me feel at home wherever you are' : 'Your love and warmth have always been a second home to me'}. ${a.memory ? 'I cherish every moment of ' + a.memory + ' and hold it close to my heart.' : 'The care and love you show everyone around you is truly something special.'} ${bl}. Eid Mubarak! 🍑`,
-                ],
-                friend: [
-                    () => `${a.howlong ? a.howlong.includes('Child') ? 'We have been through everything together since we were young, and our friendship only grows stronger.' : a.howlong.includes('School') ? 'What started as a school friendship has grown into one of the most meaningful bonds in my life.' : 'In the time we have known each other, you have become one of the most important people in my world.' : 'You are one of those rare people who makes life infinitely better just by being in it.'} ${a.thing ? 'Only we truly understand ' + a.thing + ', and that is what makes us unlike any other.' : ''} ${bl}, yaar. Eid Mubarak! 🎉`,
-                    () => `${a.vibe ? a.vibe.includes('Silly') ? 'Life is never boring with you around — and I would not have it any other way.' : a.vibe.includes('Deep') ? 'The depth of our friendship is something I am grateful for every single day.' : a.vibe.includes('Adven') ? 'Every adventure is better with you by my side.' : 'Our friendship that grew through work has become the most genuine connection.' : 'True friends are rare — and you are one of the finest.'} ${a.thing ? 'And only you would understand why ' + a.thing + ' means so much to us.' : ''} ${bl}. Eid Mubarak! 🤝`,
-                ],
-                family: [
-                    () => `${a.feeling ? 'What I am most grateful for is ' + a.feeling + ' — not every family has that, and I never take it for granted.' : 'The love and togetherness of this family is the greatest blessing in my life.'} ${a.size === 'Joint family' ? 'There is something magical about a joint family — the noise, the chaos, the love, all under one roof.' : a.size === 'Extended family' ? 'When we all come together, it is a reminder of just how blessed we truly are.' : 'Our little family unit is my whole world.'} May Allah keep us united, healthy, and surrounded by His mercy always. Eid Mubarak to every one of you! 🌙❤️`,
-                ],
-                colleague: [
-                    () => `${a.role ? a.role.includes('manager') ? 'Your leadership and support have made such a difference in my journey here.' : a.role.includes('sub') ? 'Your dedication and hard work are something I genuinely admire.' : 'Working alongside you has been a real pleasure.' : 'It is a genuine pleasure to work with someone like you.'} ${a.trait ? 'Your ' + a.trait + ' makes the whole team better.' : ''} Wishing you and your loved ones a joyful and blessed Eid. ${bl}. Eid Mubarak! 🌸`,
-                ],
-                teacher: [
-                    () => `${a.impact ? 'The way you ' + a.impact + ' is something I will carry with me for the rest of my life' : 'The impact you have had on my life goes far beyond any classroom'}. ${a.subject ? 'You did not just teach me ' + a.subject + ' — you taught me how to think, persist, and believe in myself.' : 'You gave me more than knowledge — you gave me the confidence to grow.'} May Allah reward you for every student whose life you have quietly transformed. Eid Mubarak! 📚`,
-                ],
-                neighbor: [
-                    () => `${a.trait ? 'Your ' + a.trait + ' nature makes this neighbourhood feel like a true community' : 'You are the kind of neighbour that makes a street feel like home'}. ${a.thing ? 'The way you ' + a.thing + ' has never gone unnoticed — it means more than you know.' : 'The kindness you show day after day is something we are deeply grateful for.'} ${bl}. Eid Mubarak! 🏠`,
-                ],
-                spouse: [
-                    () => `${a.married ? a.married.includes('Newly') ? 'Our first Eid together is one I will always remember — what a beautiful beginning this is.' : a.married.includes('1') ? 'Every Eid with you is better than the last, and I fall more grateful with every passing year.' : 'After all these years together, you still make my heart full in the most beautiful way.' : 'Every day with you is a blessing I never take for granted.'} ${a.trait ? 'Your ' + a.trait + ' is one of the things I love most about you — it makes everything feel possible.' : ''} ${a.wish ? 'More than anything, I wish for ' + a.wish + ' for you — because you deserve all of it and more.' : bl}. Eid Mubarak, my love! 💑`,
-                ],
-            };
-            const pool = T[relId] || T['friend'];
-            return pick(pool)();
-        }
+  const T = {
+    mother:[
+      ()=>`Your love has always been the warmest shelter in every storm — ${a.trait?'your '+a.trait+' spirit is something I will forever look up to':'and I am so endlessly grateful for it'}. ${a.memory?'Every time I think of '+a.memory+', my heart fills with a warmth only you can give.':'The love you pour into every small moment means the world to me.'} ${a.prayer?'This Eid, I pray for '+a.prayer+' for you — you deserve every bit of it and more.':bl+', Ammi.'} Eid Mubarak! 🌸`,
+      ()=>`${a.memory?'From '+a.memory+' to every quiet sacrifice you have made,':'From every sacrifice you have made to every prayer you have whispered for me,'} you have always been my greatest blessing. ${a.trait?'Your '+a.trait+' heart is something I admire more than words can ever say.':'There is simply no one like you in this world.'} ${bl}. Eid Mubarak, Ammi! 💕`,
+    ],
+    father:[
+      ()=>`${a.sacrifice?'The way you '+a.sacrifice+' without a single complaint taught me what it truly means to love':'Every sacrifice you have made for this family has shaped who I am today'}. ${a.trait?'Your '+a.trait+' nature is something I admire deeply and aspire to every single day.':'You have always been my greatest role model.'} ${a.prayer?'This Eid, my prayer for you is '+a.prayer:bl}. Eid Mubarak, Abbu! 🌙`,
+      ()=>`You have always led by example — ${a.trait?'your '+a.trait+' character has been my compass in life':'your strength and wisdom have guided me at every step'}. ${a.sacrifice?'I will never forget how you '+a.sacrifice+' for us.':'The things you have done for this family are more than I could ever repay.'} ${bl}. Eid Mubarak, Abbu! 🤲`,
+    ],
+    brother:[
+      ()=>`Having you as my ${a.age?a.age.replace(' brother','').toLowerCase():''} brother is one of the greatest gifts in my life. ${a.thing?'Our shared love for '+a.thing+' is something that makes every day with you a memory worth keeping.':'Every memory we have made together is something I treasure deeply.'} ${a.vibe?a.vibe.includes('Best')?'We are not just brothers — we are best friends, and nothing will ever change that.':a.vibe.includes('rival')?'We may argue like rivals but everyone knows we would do anything for each other.':a.vibe.includes('protect')?'Your protectiveness has always made me feel safe and I am so grateful for that.':'Our energy together is wonderfully chaotic and I would not trade it for anything.':''} ${bl}. Eid Mubarak, bhai! 🎉`,
+    ],
+    sister:[
+      ()=>`${a.trait?'Your '+a.trait+' spirit is one of the things I admire most about you':'You are one of the most remarkable people in my life'}, and this Eid I want you to know how deeply you are loved. ${a.thing?'Only we understand what '+a.thing+' truly means, and that is something no one can take from us.':'The bond we share is something truly precious.'} ${bl}. Eid Mubarak! 💜`,
+      ()=>`${a.age==='Older sister'?'You have always been my guide, my example, and my safe place.':a.age==='Younger sister'?'Watching you grow into the person you are today fills me with the most incredible pride.':'Having you as my twin means I have always had a best friend by my side.'} ${a.thing?'Our '+a.thing+' is something only we share, and I cherish it more than you know.':''} ${a.trait?'Your '+a.trait+' heart makes the world a better place.':''} ${bl}. Eid Mubarak! 🌸`,
+    ],
+    grandma:[
+      ()=>`${a.thing?'Every time I experience '+a.thing+', I feel your love wrapped warmly around me':'Your love is the kind that stays with a person for a lifetime'}. ${a.feeling?'You have always made me feel '+a.feeling+', and there is no greater gift than that.':'The feeling of being loved by you is one of the most precious things I have ever known.'} ${a.prayer?'This Eid, I pray for '+a.prayer+' for you — every comfort and every joy.':bl}. Eid Mubarak! 🤍`,
+    ],
+    grandpa:[
+      ()=>`${a.thing?'Your '+a.thing+' has shaped our entire family in ways you may not even realise':'Your wisdom and faith have been the foundation of our family'}. ${a.feeling?'You mean '+a.feeling+' to all of us, and we are so grateful to have you.':'We look up to you more than words can ever express.'} ${a.prayer?'This Eid, my prayer is '+a.prayer+' for you':bl}. Eid Mubarak! 🌙`,
+    ],
+    uncle:[
+      ()=>`${a.trait?'Your '+a.trait+' personality has always made every gathering brighter and warmer':'You have always brought so much joy to every family gathering'}. ${a.memory?'I still smile every time I think of '+a.memory+' — those moments are ones I will always treasure.':'The memories we have made together are ones I hold very close to my heart.'} ${bl}. Eid Mubarak! 🌿`,
+    ],
+    aunt:[
+      ()=>`${a.trait?'Your '+a.trait+' warmth has always made me feel at home wherever you are':'Your love and warmth have always been a second home to me'}. ${a.memory?'I cherish every moment of '+a.memory+' and hold it close to my heart.':'The care and love you show everyone around you is truly something special.'} ${bl}. Eid Mubarak! 🍑`,
+    ],
+    friend:[
+      ()=>`${a.howlong?a.howlong.includes('Child')?'We have been through everything together since we were young, and our friendship only grows stronger.':a.howlong.includes('School')?'What started as a school friendship has grown into one of the most meaningful bonds in my life.':'In the time we have known each other, you have become one of the most important people in my world.':'You are one of those rare people who makes life infinitely better just by being in it.'} ${a.thing?'Only we truly understand '+a.thing+', and that is what makes us unlike any other.':''} ${bl}, yaar. Eid Mubarak! 🎉`,
+      ()=>`${a.vibe?a.vibe.includes('Silly')?'Life is never boring with you around — and I would not have it any other way.':a.vibe.includes('Deep')?'The depth of our friendship is something I am grateful for every single day.':a.vibe.includes('Adven')?'Every adventure is better with you by my side.':'Our friendship that grew through work has become the most genuine connection.':'True friends are rare — and you are one of the finest.'} ${a.thing?'And only you would understand why '+a.thing+' means so much to us.':''} ${bl}. Eid Mubarak! 🤝`,
+    ],
+    family:[
+      ()=>`${a.feeling?'What I am most grateful for is '+a.feeling+' — not every family has that, and I never take it for granted.':'The love and togetherness of this family is the greatest blessing in my life.'} ${a.size==='Joint family'?'There is something magical about a joint family — the noise, the chaos, the love, all under one roof.':a.size==='Extended family'?'When we all come together, it is a reminder of just how blessed we truly are.':'Our little family unit is my whole world.'} May Allah keep us united, healthy, and surrounded by His mercy always. Eid Mubarak to every one of you! 🌙❤️`,
+    ],
+    colleague:[
+      ()=>`${a.role?a.role.includes('manager')?'Your leadership and support have made such a difference in my journey here.':a.role.includes('sub')?'Your dedication and hard work are something I genuinely admire.':'Working alongside you has been a real pleasure.':'It is a genuine pleasure to work with someone like you.'} ${a.trait?'Your '+a.trait+' makes the whole team better.':''} Wishing you and your loved ones a joyful and blessed Eid. ${bl}. Eid Mubarak! 🌸`,
+    ],
+    teacher:[
+      ()=>`${a.impact?'The way you '+a.impact+' is something I will carry with me for the rest of my life':'The impact you have had on my life goes far beyond any classroom'}. ${a.subject?'You did not just teach me '+a.subject+' — you taught me how to think, persist, and believe in myself.':'You gave me more than knowledge — you gave me the confidence to grow.'} May Allah reward you for every student whose life you have quietly transformed. Eid Mubarak! 📚`,
+    ],
+    neighbor:[
+      ()=>`${a.trait?'Your '+a.trait+' nature makes this neighbourhood feel like a true community':'You are the kind of neighbour that makes a street feel like home'}. ${a.thing?'The way you '+a.thing+' has never gone unnoticed — it means more than you know.':'The kindness you show day after day is something we are deeply grateful for.'} ${bl}. Eid Mubarak! 🏠`,
+    ],
+    spouse:[
+      ()=>`${a.married?a.married.includes('Newly')?'Our first Eid together is one I will always remember — what a beautiful beginning this is.':a.married.includes('1')?'Every Eid with you is better than the last, and I fall more grateful with every passing year.':'After all these years together, you still make my heart full in the most beautiful way.':'Every day with you is a blessing I never take for granted.'} ${a.trait?'Your '+a.trait+' is one of the things I love most about you — it makes everything feel possible.':''} ${a.wish?'More than anything, I wish for '+a.wish+' for you — because you deserve all of it and more.':bl}. Eid Mubarak, my love! 💑`,
+    ],
+  };
+  const pool = T[relId] || T['friend'];
+  return pick(pool)();
+}
 
-        // =====================================================
-        // STATE
-        // =====================================================
-        let curRel = null;
-        let curAnswers = {};
-        let curWish = '';
-        let shareData = null;
-        let isEditing = false;
-        let twTimer = null;
-        let activePage = 'pg-rel';
+// =====================================================
+// STATE
+// =====================================================
+let curRel = null;
+let curAnswers = {};
+let curWish = '';
+let shareData = null;
+let isEditing = false;
+let twTimer = null;
+let activePage = 'pg-rel';
 
-        // =====================================================
-        // PETALS
-        // =====================================================
-        const emos = ['🌸', '✨', '🌙', '⭐', '💮', '🌺', '🪷'];
-        const pc = document.getElementById('petals');
-        for (let i = 0; i < 20; i++) {
-            const p = document.createElement('div');
-            p.className = 'petal';
-            p.textContent = emos[Math.floor(Math.random() * emos.length)];
-            p.style.left = (Math.random() * 100) + 'vw';
-            p.style.animationDuration = (7 + Math.random() * 11) + 's';
-            p.style.animationDelay = (Math.random() * 15) + 's';
-            p.style.fontSize = (10 + Math.random() * 13) + 'px';
-            pc.appendChild(p);
-        }
+// =====================================================
+// PETALS
+// =====================================================
+const emos = ['🌸','✨','🌙','⭐','💮','🌺','🪷'];
+const pc = document.getElementById('petals');
+for(let i=0;i<20;i++){
+  const p = document.createElement('div');
+  p.className = 'petal';
+  p.textContent = emos[Math.floor(Math.random()*emos.length)];
+  p.style.left = (Math.random()*100)+'vw';
+  p.style.animationDuration = (7+Math.random()*11)+'s';
+  p.style.animationDelay = (Math.random()*15)+'s';
+  p.style.fontSize = (10+Math.random()*13)+'px';
+  pc.appendChild(p);
+}
 
-        // =====================================================
-        // PAGE NAVIGATION
-        // =====================================================
-        function nav(to, dir) {
-            const from = document.getElementById(activePage);
-            const toEl = document.getElementById(to);
-            from.classList.add('slide-out');
-            from.classList.remove('active');
-            setTimeout(() => {
-                from.classList.remove('slide-out');
-                toEl.style.transform = dir === 'back' ? 'translateX(-50px)' : 'translateX(50px)';
-                toEl.style.opacity = '0';
-                toEl.classList.add('active');
-                toEl.offsetHeight; // reflow
-                toEl.style.transform = '';
-                toEl.style.opacity = '';
-                toEl.scrollTop = 0;
-                activePage = to;
-            }, 320);
-        }
+// =====================================================
+// PAGE NAVIGATION
+// =====================================================
+function nav(to, dir){
+  const from = document.getElementById(activePage);
+  const toEl = document.getElementById(to);
+  from.classList.add('slide-out');
+  from.classList.remove('active');
+  setTimeout(()=>{
+    from.classList.remove('slide-out');
+    toEl.style.transform = dir==='back' ? 'translateX(-50px)' : 'translateX(50px)';
+    toEl.style.opacity = '0';
+    toEl.classList.add('active');
+    toEl.offsetHeight; // reflow
+    toEl.style.transform = '';
+    toEl.style.opacity = '';
+    toEl.scrollTop = 0;
+    activePage = to;
+  }, 320);
+}
 
-        // =====================================================
-        // BUILD RELATION BUTTONS
-        // =====================================================
-        const rg = document.getElementById('rel-grid');
-        RELS.forEach(r => {
-            const b = document.createElement('button');
-            b.className = 'rel-card';
-            b.innerHTML = `<span class="ico">${r.ico}</span>${r.label}`;
-            b.onclick = () => {
-                document.querySelectorAll('.rel-card').forEach(x => x.classList.remove('picked'));
-                b.classList.add('picked');
-                curRel = r.id;
-                loadQ(r.id);
-                nav('pg-q');
-            };
-            rg.appendChild(b);
-        });
+// =====================================================
+// BUILD RELATION BUTTONS
+// =====================================================
+const rg = document.getElementById('rel-grid');
+RELS.forEach(r=>{
+  const b = document.createElement('button');
+  b.className = 'rel-card';
+  b.innerHTML = `<span class="ico">${r.ico}</span>${r.label}`;
+  b.onclick = ()=>{
+    document.querySelectorAll('.rel-card').forEach(x=>x.classList.remove('picked'));
+    b.classList.add('picked');
+    curRel = r.id;
+    loadQ(r.id);
+    nav('pg-q');
+  };
+  rg.appendChild(b);
+});
 
-        // =====================================================
-        // LOAD QUESTIONS
-        // =====================================================
-        function loadQ(relId) {
-            const rel = RELS.find(r => r.id === relId);
-            document.getElementById('ql').textContent = rel.label;
-            const qs = QS[relId] || [];
-            const g = document.getElementById('q-grid');
-            g.innerHTML = '';
-            qs.forEach(q => {
-                const d = document.createElement('div');
-                d.className = 'q-item' + (q.full ? ' full' : '');
-                let inp = '';
-                if (q.type === 'sel') {
-                    inp = `<select id="q_${q.id}"><option value="">Choose…</option>${(q.opts || []).map(o => `<option value="${o}">${o}</option>`).join('')}</select>`;
-                } else {
-                    inp = `<input type="text" id="q_${q.id}" placeholder="${q.ph || ''}" maxlength="120">`;
-                }
-                d.innerHTML = `<label>${q.lbl}</label>${inp}`;
-                g.appendChild(d);
-            });
-        }
+// =====================================================
+// LOAD QUESTIONS
+// =====================================================
+function loadQ(relId){
+  const rel = RELS.find(r=>r.id===relId);
+  document.getElementById('ql').textContent = rel.label;
+  const qs = QS[relId] || [];
+  const g = document.getElementById('q-grid');
+  g.innerHTML = '';
+  qs.forEach(q=>{
+    const d = document.createElement('div');
+    d.className = 'q-item' + (q.full?' full':'');
+    let inp = '';
+    if(q.type==='sel'){
+      inp = `<select id="q_${q.id}"><option value="">Choose…</option>${(q.opts||[]).map(o=>`<option value="${o}">${o}</option>`).join('')}</select>`;
+    } else {
+      inp = `<input type="text" id="q_${q.id}" placeholder="${q.ph||''}" maxlength="120">`;
+    }
+    d.innerHTML = `<label>${q.lbl}</label>${inp}`;
+    g.appendChild(d);
+  });
+}
 
-        // =====================================================
-        // COLLECT ANSWERS
-        // =====================================================
-        function collectQ() {
-            const qs = QS[curRel] || [];
-            const a = {};
-            qs.forEach(q => {
-                const el = document.getElementById('q_' + q.id);
-                if (el) a[q.id] = el.value.trim();
-            });
-            return a;
-        }
+// =====================================================
+// COLLECT ANSWERS
+// =====================================================
+function collectQ(){
+  const qs = QS[curRel]||[];
+  const a = {};
+  qs.forEach(q=>{
+    const el = document.getElementById('q_'+q.id);
+    if(el) a[q.id] = el.value.trim();
+  });
+  return a;
+}
 
-        // =====================================================
-        // TYPEWRITER
-        // =====================================================
-        function typewrite(text, done) {
-            const el = document.getElementById('tw-txt');
-            const cur = document.getElementById('tw-cur');
-            const box = document.getElementById('tw-box');
-            el.textContent = '';
-            cur.style.display = 'inline-block';
-            box.style.display = 'block';
-            let i = 0;
-            const speed = Math.max(14, Math.min(34, 2800 / text.length));
-            if (twTimer) clearInterval(twTimer);
-            twTimer = setInterval(() => {
-                if (i < text.length) {
-                    el.textContent += text[i++];
-                    box.scrollTop = box.scrollHeight;
-                } else {
-                    clearInterval(twTimer);
-                    cur.style.display = 'none';
-                    setTimeout(done, 700);
-                }
-            }, speed);
-        }
+// =====================================================
+// TYPEWRITER
+// =====================================================
+function typewrite(text, done){
+  const el  = document.getElementById('tw-txt');
+  const cur = document.getElementById('tw-cur');
+  const box = document.getElementById('tw-box');
+  el.textContent = '';
+  cur.style.display = 'inline-block';
+  box.style.display = 'block';
+  let i = 0;
+  const speed = Math.max(14, Math.min(34, 2800/text.length));
+  if(twTimer) clearInterval(twTimer);
+  twTimer = setInterval(()=>{
+    if(i < text.length){
+      el.textContent += text[i++];
+      box.scrollTop = box.scrollHeight;
+    } else {
+      clearInterval(twTimer);
+      cur.style.display = 'none';
+      setTimeout(done, 700);
+    }
+  }, speed);
+}
 
-        // =====================================================
-        // MAIN GENERATE FUNCTION
-        // =====================================================
-        function doGenerate() {
-            if (!curRel) { toast('Please pick a relation first!'); return; }
-            curAnswers = collectQ();
-            const rel = RELS.find(r => r.id === curRel);
-            const name = curAnswers.name || rel.label;
+// =====================================================
+// MAIN GENERATE FUNCTION
+// =====================================================
+function doGenerate(){
+  if(!curRel){ toast('Please pick a relation first!'); return; }
+  curAnswers = collectQ();
+  const rel  = RELS.find(r=>r.id===curRel);
+  const name = curAnswers.name || rel.label;
 
-            // Reset gen page
-            document.getElementById('gen-ico').textContent = '🌙';
-            document.getElementById('gen-ico').style.display = 'block';
-            document.getElementById('gen-sub').textContent = 'Writing something special for ' + name + '…';
-            document.getElementById('gen-dots').style.display = 'flex';
-            document.getElementById('tw-box').style.display = 'none';
-            document.getElementById('tw-txt').textContent = '';
-            document.getElementById('tw-cur').style.display = 'none';
-            if (twTimer) clearInterval(twTimer);
+  // Reset gen page
+  document.getElementById('gen-ico').textContent = '🌙';
+  document.getElementById('gen-ico').style.display = 'block';
+  document.getElementById('gen-sub').textContent  = 'Writing something special for '+name+'…';
+  document.getElementById('gen-dots').style.display = 'flex';
+  document.getElementById('tw-box').style.display = 'none';
+  document.getElementById('tw-txt').textContent   = '';
+  document.getElementById('tw-cur').style.display = 'none';
+  if(twTimer) clearInterval(twTimer);
 
-            nav('pg-gen');
+  nav('pg-gen');
 
-            // Small delay so page transition looks smooth, then generate
-            setTimeout(() => {
-                const wish = buildWish(curRel, curAnswers);
-                curWish = wish;
+  // Small delay so page transition looks smooth, then generate
+  setTimeout(()=>{
+    const wish = buildWish(curRel, curAnswers);
+    curWish = wish;
 
-                // Hide dots, show typewriter
-                document.getElementById('gen-dots').style.display = 'none';
+    // Hide dots, show typewriter
+    document.getElementById('gen-dots').style.display = 'none';
 
-                typewrite(wish, () => {
-                    // Build card then navigate
-                    buildCard(rel, name, wish);
-                    shareData = { rel: curRel, name, wish };
-                    nav('pg-card');
-                });
+    typewrite(wish, ()=>{
+      // Build card then navigate
+      buildCard(rel, name, wish);
+      shareData = { rel: curRel, name, wish };
+      nav('pg-card');
+    });
 
-            }, 800);
-        }
+  }, 800);
+}
 
-        // =====================================================
-        // BUILD CARD
-        // =====================================================
-        function buildCard(rel, name, wish) {
-            const card = document.getElementById('wish-card');
-            card.style.background = rel.bg;
-            document.getElementById('orb-a').style.background = rel.o1;
-            document.getElementById('orb-b').style.background = rel.o2;
-            document.getElementById('orb-c').style.background = rel.o3;
-            document.getElementById('c-ico').textContent = rel.ico;
-            const tag = document.getElementById('c-tag');
-            tag.textContent = rel.label.toUpperCase();
-            tag.style.background = rel.tag;
-            tag.style.color = rel.tagC;
-            document.getElementById('c-arabic').style.color = rel.tc;
-            document.getElementById('c-title').style.color = rel.tc;
-            document.getElementById('c-dear').textContent = 'Dear ' + name + ',';
-            document.getElementById('c-dear').style.color = rel.bc;
-            document.getElementById('c-footer').style.color = rel.fc;
-            const ta = document.getElementById('wish-ta');
-            ta.value = wish;
-            ta.style.color = rel.bc;
-            ta.readOnly = true;
-            ta.classList.remove('edit-mode');
-            isEditing = false;
-            document.getElementById('edit-lbl').textContent = 'Tap to edit message';
-            autoH(ta);
-            // reset share
-            document.getElementById('share-box').style.display = 'none';
-            document.getElementById('cp-btn').style.display = 'none';
-        }
+// =====================================================
+// BUILD CARD
+// =====================================================
+function buildCard(rel, name, wish){
+  const card = document.getElementById('wish-card');
+  card.style.background = rel.bg;
+  document.getElementById('orb-a').style.background = rel.o1;
+  document.getElementById('orb-b').style.background = rel.o2;
+  document.getElementById('orb-c').style.background = rel.o3;
+  document.getElementById('c-ico').textContent = rel.ico;
+  const tag = document.getElementById('c-tag');
+  tag.textContent = rel.label.toUpperCase();
+  tag.style.background = rel.tag;
+  tag.style.color = rel.tagC;
+  document.getElementById('c-arabic').style.color = rel.tc;
+  document.getElementById('c-title').style.color  = rel.tc;
+  document.getElementById('c-dear').textContent   = 'Dear '+name+',';
+  document.getElementById('c-dear').style.color   = rel.bc;
+  document.getElementById('c-footer').style.color = rel.fc;
+  const disp = document.getElementById('wish-display');
+  const ta   = document.getElementById('wish-ta');
+  disp.textContent = wish;
+  disp.style.color = rel.bc;
+  disp.style.display = 'block';
+  ta.value = wish;
+  ta.style.color = rel.bc;
+  ta.style.display = 'none';
+  isEditing = false;
+  document.getElementById('edit-lbl').textContent = 'Tap to edit message';
+  // reset share
+  document.getElementById('share-box').style.display = 'none';
+  document.getElementById('cp-btn').style.display = 'none';
+}
 
-        function autoH(ta) {
-            ta.style.height = 'auto';
-            ta.style.height = ta.scrollHeight + 'px';
-        }
-        document.getElementById('wish-ta').addEventListener('input', function () { autoH(this); });
+function autoH(ta){
+  ta.style.height = 'auto';
+  ta.style.height = ta.scrollHeight + 'px';
+}
+document.getElementById('wish-ta').addEventListener('input', function(){ autoH(this); });
 
-        // =====================================================
-        // EDIT TOGGLE
-        // =====================================================
-        function toggleEdit() {
-            const ta = document.getElementById('wish-ta');
-            isEditing = !isEditing;
-            if (isEditing) {
-                ta.readOnly = false;
-                ta.classList.add('edit-mode');
-                ta.focus();
-                document.getElementById('edit-lbl').textContent = '✅ Tap to save';
-                toast('✏️ You can now edit the message');
-            } else {
-                ta.readOnly = true;
-                ta.classList.remove('edit-mode');
-                curWish = ta.value;
-                if (shareData) shareData.wish = curWish;
-                document.getElementById('edit-lbl').textContent = 'Tap to edit message';
-                autoH(ta);
-                toast('✅ Message saved!');
-            }
-        }
+// Also fix view-mode download to use div properly
 
-        // =====================================================
-        // DOWNLOAD
-        // =====================================================
-        function dlCard() {
-            const hint = document.getElementById('edit-btn');
-            hint.style.display = 'none';
-            toast('⏳ Preparing card…');
-            html2canvas(document.getElementById('wish-card'), {
-                scale: 2.5, useCORS: true, backgroundColor: null, logging: false
-            }).then(canvas => {
-                const a = document.createElement('a');
-                a.download = 'EidMubarak.png';
-                a.href = canvas.toDataURL('image/png');
-                a.click();
-                toast('🎉 Card downloaded!');
-            }).catch(() => toast('❌ Download failed, try again')).finally(() => {
-                hint.style.display = 'inline-flex';
-            });
-        }
 
-        // =====================================================
-        // SHARE LINK
-        // =====================================================
-        function makeLink() {
-            if (!shareData) { toast('Generate a card first!'); return; }
-            const p = new URLSearchParams({ rel: shareData.rel, name: shareData.name, wish: shareData.wish });
-            const url = window.location.origin + window.location.pathname + '?' + p.toString();
-            const box = document.getElementById('share-box');
-            box.style.display = 'block';
-            box.textContent = url;
-            document.getElementById('cp-btn').style.display = 'flex';
-            toast('🔗 Link ready! Copy it below');
-        }
+// =====================================================
+// EDIT TOGGLE
+// =====================================================
+function toggleEdit(){
+  const disp = document.getElementById('wish-display');
+  const ta   = document.getElementById('wish-ta');
+  isEditing = !isEditing;
+  if(isEditing){
+    // Switch to textarea for editing
+    ta.value = disp.textContent;
+    ta.style.color = disp.style.color;
+    disp.style.display = 'none';
+    ta.style.display = 'block';
+    autoH(ta);
+    ta.focus();
+    document.getElementById('edit-lbl').textContent = '✅ Tap to save';
+    toast('✏️ You can now edit the message');
+  } else {
+    // Save back to display div
+    curWish = ta.value;
+    if(shareData) shareData.wish = curWish;
+    disp.textContent = curWish;
+    disp.style.display = 'block';
+    ta.style.display = 'none';
+    document.getElementById('edit-lbl').textContent = 'Tap to edit message';
+    toast('✅ Message saved!');
+  }
+}
 
-        function copyLink() {
-            const url = document.getElementById('share-box').textContent;
-            navigator.clipboard.writeText(url)
-                .then(() => toast('📋 Link copied!'))
-                .catch(() => {
-                    const i = document.createElement('input');
-                    i.value = url; document.body.appendChild(i);
-                    i.select(); document.execCommand('copy');
-                    document.body.removeChild(i);
-                    toast('📋 Copied!');
-                });
-        }
+// =====================================================
+// DOWNLOAD
+// =====================================================
+function dlCard(){
+  // If currently editing, save first
+  if(isEditing) toggleEdit();
 
-        // =====================================================
-        // VIEW MODE (shared link)
-        // =====================================================
-        function checkLink() {
-            const p = new URLSearchParams(window.location.search);
-            const relId = p.get('rel');
-            const name = p.get('name');
-            const wish = p.get('wish');
-            if (!relId || !name || !wish) return false;
-            const rel = RELS.find(r => r.id === relId);
-            if (!rel) return false;
+  const hint = document.getElementById('edit-btn');
+  const ta   = document.getElementById('wish-ta');
+  hint.style.display = 'none';
+  ta.style.display   = 'none'; // make sure textarea is hidden
 
-            document.getElementById('pg-rel').classList.remove('active');
-            const vp = document.getElementById('pg-view');
-            vp.classList.add('active');
-            activePage = 'pg-view';
+  toast('⏳ Preparing card…');
 
-            const vc = document.getElementById('view-card');
-            vc.style.background = rel.bg;
-            vc.innerHTML = `
+  setTimeout(()=>{
+    html2canvas(document.getElementById('wish-card'),{
+      scale: 2.5,
+      useCORS: true,
+      backgroundColor: null,
+      logging: false,
+      onclone: function(clonedDoc){
+        // In the clone, make sure display div is fully visible
+        const disp = clonedDoc.getElementById('wish-display');
+        const cloneTa = clonedDoc.getElementById('wish-ta');
+        if(disp){ disp.style.display = 'block'; }
+        if(cloneTa){ cloneTa.style.display = 'none'; }
+        // Hide edit button in clone
+        const btn = clonedDoc.getElementById('edit-btn');
+        if(btn) btn.style.display = 'none';
+      }
+    }).then(canvas=>{
+      const a = document.createElement('a');
+      a.download = 'EidMubarak.png';
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+      toast('🎉 Card downloaded!');
+    }).catch(()=> toast('❌ Download failed, try again')).finally(()=>{
+      hint.style.display = 'inline-flex';
+    });
+  }, 100);
+}
+
+// =====================================================
+// SHARE LINK
+// =====================================================
+function makeLink(){
+  if(!shareData){ toast('Generate a card first!'); return; }
+  const p = new URLSearchParams({ rel:shareData.rel, name:shareData.name, wish:shareData.wish });
+  const url = window.location.origin + window.location.pathname + '?' + p.toString();
+  const box = document.getElementById('share-box');
+  box.style.display = 'block';
+  box.textContent = url;
+  document.getElementById('cp-btn').style.display = 'flex';
+  toast('🔗 Link ready! Copy it below');
+}
+
+function copyLink(){
+  const url = document.getElementById('share-box').textContent;
+  navigator.clipboard.writeText(url)
+    .then(()=> toast('📋 Link copied!'))
+    .catch(()=>{
+      const i = document.createElement('input');
+      i.value = url; document.body.appendChild(i);
+      i.select(); document.execCommand('copy');
+      document.body.removeChild(i);
+      toast('📋 Copied!');
+    });
+}
+
+// =====================================================
+// VIEW MODE (shared link)
+// =====================================================
+function checkLink(){
+  const p = new URLSearchParams(window.location.search);
+  const relId = p.get('rel');
+  const name  = p.get('name');
+  const wish  = p.get('wish');
+  if(!relId || !name || !wish) return false;
+  const rel = RELS.find(r=>r.id===relId);
+  if(!rel) return false;
+
+  document.getElementById('pg-rel').classList.remove('active');
+  const vp = document.getElementById('pg-view');
+  vp.classList.add('active');
+  activePage = 'pg-view';
+
+  const vc = document.getElementById('view-card');
+  vc.style.background = rel.bg;
+  vc.innerHTML = `
     <div style="position:absolute;border-radius:50%;opacity:.17;width:190px;height:190px;top:-65px;left:-65px;background:${rel.o1}"></div>
     <div style="position:absolute;border-radius:50%;opacity:.17;width:140px;height:140px;bottom:-45px;right:-45px;background:${rel.o2}"></div>
     <div style="position:absolute;border-radius:50%;opacity:.17;width:70px;height:70px;top:24px;right:32px;background:${rel.o3}"></div>
@@ -1380,39 +941,38 @@
     <div style="font-size:1.4rem;margin-bottom:6px;opacity:.62;letter-spacing:2px;color:${rel.tc}">عيد مبارك</div>
     <div style="font-family:'Dancing Script',cursive;font-size:clamp(1.9rem,6vw,2.75rem);line-height:1.15;margin-bottom:5px;color:${rel.tc}">Eid Mubarak</div>
     <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;margin-bottom:14px;color:${rel.bc}">Dear ${name},</div>
-    <p style="font-family:'Nunito',sans-serif;font-size:.92rem;line-height:1.82;font-weight:400;max-width:420px;color:${rel.bc}">${wish.replace(/\n/g, '<br>')}</p>
+    <p style="font-family:'Nunito',sans-serif;font-size:.92rem;line-height:1.82;font-weight:400;max-width:420px;color:${rel.bc}">${wish.replace(/\n/g,'<br>')}</p>
     <div style="margin-top:18px;font-family:'Dancing Script',cursive;font-size:.98rem;opacity:.62;color:${rel.fc}">🌙 With love &amp; prayers 🌙</div>
   `;
 
-            document.getElementById('view-dl').onclick = () => {
-                toast('⏳ Preparing…');
-                html2canvas(vc, { scale: 2.5, useCORS: true, backgroundColor: null }).then(c => {
-                    const a = document.createElement('a'); a.download = 'EidMubarak.png';
-                    a.href = c.toDataURL('image/png'); a.click();
-                    toast('🎉 Saved!');
-                });
-            };
-            return true;
-        }
+  document.getElementById('view-dl').onclick = ()=>{
+    toast('⏳ Preparing…');
+    html2canvas(vc,{scale:2.5,useCORS:true,backgroundColor:null}).then(c=>{
+      const a=document.createElement('a'); a.download='EidMubarak.png';
+      a.href=c.toDataURL('image/png'); a.click();
+      toast('🎉 Saved!');
+    });
+  };
+  return true;
+}
 
-        function goHome() { window.location.href = window.location.pathname; }
+function goHome(){ window.location.href = window.location.pathname; }
 
-        // =====================================================
-        // TOAST
-        // =====================================================
-        function toast(msg) {
-            const t = document.getElementById('toast');
-            t.textContent = msg;
-            t.classList.add('show');
-            clearTimeout(t._h);
-            t._h = setTimeout(() => t.classList.remove('show'), 2800);
-        }
+// =====================================================
+// TOAST
+// =====================================================
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._h);
+  t._h = setTimeout(()=> t.classList.remove('show'), 2800);
+}
 
-        // =====================================================
-        // INIT
-        // =====================================================
-        checkLink();
-    </script>
+// =====================================================
+// INIT
+// =====================================================
+checkLink();
+</script>
 </body>
-
 </html>
